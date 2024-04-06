@@ -1,6 +1,6 @@
 'use client'
 import Container from "@/app/_components/container";
-import Join from "@/app/_components/Join";
+import Join from "@/app/_components/join";
 import { Intro } from "../_components/intro";
 import { Space } from 'antd';
 import axios from 'axios';
