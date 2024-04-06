@@ -29,7 +29,8 @@ const LoginForm = () => {
       });
       console.log(response);
       alert('로그인에 성공했습니다.');
-      router.push('/');
+      //router.push('/');
+      window.location.href = '/';
     } catch (error) {
       console.error(error);
       alert('로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해주세요.');
