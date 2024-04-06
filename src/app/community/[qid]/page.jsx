@@ -39,7 +39,7 @@ const comment_data = [
       'Modi porro officia nesciunt cumque, debitis eum accusamus expedita, adipisci autem quos consectetur repudiandae inventore voluptas voluptate minus! Natus ducimus quisquam ipsa.',
   },
 ];
-export const Content = ({ params }) => {
+const Content = ({ params }) => {
   const { data: session, status } = useSession();
   const [data, setData] = useState(null);
   const [comment, setComment] = useState(null);
