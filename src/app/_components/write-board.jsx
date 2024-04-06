@@ -21,7 +21,7 @@ export default function WritePostPage() {
     setLoading(true);
     try {
       const response = await axios.post(
-        `https://api.g-start-up.com/api/question/${params.qid}`,
+        `https://api.g-start-up.com/api/question/`,
         {
           headers: {
             // 헤더에 Authorization 추가
