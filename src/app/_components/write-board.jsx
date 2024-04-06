@@ -23,6 +23,9 @@ export default function WritePostPage() {
       const response = await axios.post(
         `https://api.g-start-up.com/api/question/`,
         {
+          title: title,
+          content: content},
+        {
           headers: {
             // 헤더에 Authorization 추가
             authorization: `Bearer ${session.user.id}`,
