@@ -13,36 +13,10 @@ import { PostHeader } from '@/app/_components/post-header';
 const { Title, Paragraph, Text, Link } = Typography;
 import { Card, List, Avatar, Input, Button, Switch } from 'antd';
 
-const comment_data = [
-  {
-    avatar: 'https://api.adorable.io/avatars/96/apple@adorable.png',
-    title: 'Apple Seed',
-    description:
-      'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, inventore laboriosam!',
-  },
-  {
-    avatar: 'https://api.adorable.io/avatars/96/banana@adorable.png',
-    title: 'Banana Long',
-    description:
-      'Iusto ex ad placeat dolor tempora dolores provident hic, modi voluptatem deserunt possimus, architecto dignissimos quod fugiat enim iste, corporis neque numquam.',
-  },
-  {
-    avatar: 'https://api.adorable.io/avatars/96/clementine@adorable.png',
-    title: 'Clementine Sour',
-    description:
-      'Ullam unde accusamus laboriosam enim, quam, sit ipsum amet ex repudiandae velit ipsa voluptatibus quasi impedit cupiditate, obcaecati delectus exercitationem iure quas.',
-  },
-  {
-    avatar: 'https://api.adorable.io/avatars/96/dates@adorable.png',
-    title: 'Dates Dune',
-    description:
-      'Modi porro officia nesciunt cumque, debitis eum accusamus expedita, adipisci autem quos consectetur repudiandae inventore voluptas voluptate minus! Natus ducimus quisquam ipsa.',
-  },
-];
 const Content = ({ params }) => {
   const { data: session, status } = useSession();
   const [data, setData] = useState(null);
-  const [comment, setComment] = useState(null);
+  const [comment, setComment] = useState('');
   const [isContentLoading, setIsContentLoading] = useState(true);
   const [isCommentLoading, setIsCommentLoading] = useState(false);
 
@@ -56,7 +30,6 @@ const Content = ({ params }) => {
         `https://api.g-start-up.com/api/question/${params.qid}`,
         {
           headers: {
-            // 헤더에 Authorization 추가
             authorization: `Bearer ${session?.user?.id}`,
           },
         }
@@ -74,11 +47,10 @@ const Content = ({ params }) => {
       const response = await axios.post(
         `https://api.g-start-up.com/api/question/${params.qid}/answer`,
         {
-          content: 'Hello, this is my answer.', // 여기에 content 값을 추가
+          content: comment,
         },
         {
           headers: {
-            // 헤더 설정
             Authorization: `Bearer ${session?.user?.id}`,
           },
         }
@@ -88,6 +60,7 @@ const Content = ({ params }) => {
       fetchData();
     } catch {}
   };
+
   if (!data || isContentLoading) {
     return <Alert type='info' message='Loading...' />;
   }
@@ -97,10 +70,22 @@ const Content = ({ params }) => {
       <Container>
         <Intro />
         <article className='mb-32'>
-          <Card title={`제목 : ${data.title}`} style={{ width: '100%' }}>
-            <Typography>
-              <Paragraph>{data.content}</Paragraph>
-            </Typography>
+          <Card
+            title={<Title level={3}>제목 : {data.title}</Title>}
+            extra={
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Text>작성자 : {data.author}</Text>
+                <Divider type='vertical' style={{ margin: '0 5px' }} />
+                <Text>작성일자 : {new Date(data.created_date).toLocaleString()}</Text>
+                <Divider type='vertical' style={{ margin: '0 5px' }} />
+                <Text>조회수 : {data.hit_count}</Text>
+              </div>
+            }
+            style={{ width: '100%' }}
+          >
+          <Typography style={{ Height: '1000px', overflowY: 'auto' }}> 
+            <Paragraph>{data.content}</Paragraph>
+          </Typography>
           </Card>
         </article>
         <div className='CommentList'>
@@ -111,9 +96,10 @@ const Content = ({ params }) => {
             renderItem={(item) => (
               <List.Item>
                 <List.Item.Meta
-                  title={item.author}
-                  description={item.content}
+                  title={`작성자: ${item.uid}`}
+                  description={`작성일: ${new Date(item.created_date).toLocaleString()}`}
                 />
+                <div>{item.content}</div>
               </List.Item>
             )}
             style={{
