@@ -38,7 +38,7 @@ const JoinForm = () => {
 
 const JoinContainer = ({ children }) => (
   <div style={{ display: 'flex', justifyContent: 'center' }}>
-    <div style={{ marginTop: '20px', width: '100%', maxWidth: '400px'}}>
+    <div style={{ marginTop: '20px', marginBottom: '20px', width: '100%', maxWidth: '400px'}}>
       {children}
     </div>
   </div>
