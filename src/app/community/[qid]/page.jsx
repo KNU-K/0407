@@ -15,8 +15,63 @@ import { Card, List, Avatar, Input, Button, Switch } from 'antd';
 
 const Content = ({ params }) => {
   const { data: session, status } = useSession();
-  const [data, setData] =유</h1>
-        </Space>
+  const [data, setData] = useState(null);
+  const [comment, setComment] = useState('');
+  const [isContentLoading, setIsContentLoading] = useState(true);
+  const [isCommentLoading, setIsCommentLoading] = useState(false);
+
+  useEffect(() => {
+    fetchData();
+  }, [session]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `https://api.g-start-up.com/api/question/${params.qid}`,
+        {
+          headers: {
+            authorization: `Bearer ${session?.user?.id}`,
+          },
+        }
+      );
+      console.log(response.data);
+      setData(response.data);
+      setIsContentLoading(false);
+      setIsCommentLoading(false);
+    } catch {}
+  };
+
+  const addComment = async () => {
+    setIsCommentLoading(true);
+    try {
+      const response = await axios.post(
+        `https://api.g-start-up.com/api/question/${params.qid}/answer`,
+        {
+          content: comment,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${session?.user?.id}`,
+          },
+        }
+      );
+
+      alert('댓글이 작성되었습니다.');
+      fetchData();
+    } catch {}
+  };
+
+  if (!data || isContentLoading) {
+    return <Alert type='info' message='Loading...' />;
+  }
+
+  return (
+    <main>
+      <Container>
+        <Intro />
+        <Space className='justify-between mb-3'>
+            <h1 style={{ fontSize: 20, fontWeight: 'bolder' }}>경험공유</h1>
+          </Space>
         <article className='mb-32'>
           <Card
             title={<Title level={3}>제목 : {data.title}</Title>}
