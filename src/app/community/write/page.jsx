@@ -1,3 +1,4 @@
+"use client";
 import Container from "@/app/_components/container";
 import WriteBoard from "@/app/_components/write-board";
 import { Intro } from "@/app/_components/intro";
