@@ -73,6 +73,10 @@ const App = () => {
         </TableCell>
         <TableCell>{item.organization}</TableCell>
         <TableCell>
+          <Chip
+            label={item.tag}
+            style={{ backgroundColor: getTagColor(item.tag), color: "#fff" }}
+          />
           {isNewNotice(item.date_begin) && (
             <Chip
               label={"New"}
@@ -82,13 +86,13 @@ const App = () => {
           {isWithin3Days(item.date_end) && (
             <Chip
               label={"마감임박"}
-              style={{ backgroundColor: "#555", color: "#fff" }}
+              style={{
+                backgroundColor: "#555",
+                color: "#fff",
+                marginLeft: "3px",
+              }}
             />
           )}
-          <Chip
-            label={item.tag}
-            style={{ backgroundColor: getTagColor(item.tag), color: "#fff" }}
-          />
         </TableCell>
         <TableCell>{item.hit_count}</TableCell>
         <TableCell>{item.like_count}</TableCell>

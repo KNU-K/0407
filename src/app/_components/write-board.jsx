@@ -27,7 +27,6 @@ export default function WritePostPage() {
           content: content},
         {
           headers: {
-            // 헤더에 Authorization 추가
             authorization: `Bearer ${session.user.id}`,
           },
         }

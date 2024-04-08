@@ -29,7 +29,7 @@ const LoginForm = () => {
       });
       console.log(response);
       alert('로그인에 성공했습니다.');
-      //router.push('/');
+      //router.push('/'); 
       window.location.href = '/';
     } catch (error) {
       console.error(error);
