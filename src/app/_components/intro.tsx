@@ -9,12 +9,20 @@ import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Spinner from './shared/spinner';
 import { Pointer } from 'lucide-react';
+import { SmileOutlined } from '@ant-design/icons';
+
 
 export function Intro() {
   const { data: session, status } = useSession();
   const routeHomePageHandler = (e:any)=>{
     location.href = "/"
   }
+
+  //피드백 버튼 onclick시 작동함수
+  // const sendFeedback = () => {
+
+  // };
+
   return (
     <section className='flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12'>
       
@@ -23,6 +31,16 @@ export function Intro() {
       </h1>
       <nav>
         <ul className='flex' style={{ alignItems: 'center' }}>
+        <div className='mr-6'>
+        <Button
+          type='primary'
+          icon={<SmileOutlined />}
+          style={{ fontSize: '16px', fontWeight: 'bold', marginRight: '8px' }}
+          // onClick={sendFeedback}
+        >
+          피드백 보내기
+        </Button>
+      </div>
           <li className='mr-6'>
             <Link as={`/`} href='/' className='hover:underline'>
               홈
@@ -43,7 +61,7 @@ export function Intro() {
               href='/card-news'
               className='hover:underline'
             >
-              카드 뉴스
+              카드뉴스
             </Link>
           </li>
           <li className='mr-6'>
@@ -57,7 +75,7 @@ export function Intro() {
               href='/community'
               className='hover:underline'
             >
-              경험 공유
+              경험공유
             </Link>
           </li>
           {status !== 'unauthenticated' ? (
