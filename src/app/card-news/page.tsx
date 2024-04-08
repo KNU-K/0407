@@ -16,6 +16,9 @@ export default function Index() {
     <main>
       <Container>
         <Intro />
+                <Space className='justify-between mb-3'>
+            <h1 style={{ fontSize: 20, fontWeight: 'bolder' }}>카드뉴스</h1>
+          </Space>
         <CardList />
       </Container>
     </main>
