@@ -18,10 +18,6 @@ export function Intro() {
     location.href = "/"
   }
 
-  //피드백 버튼 onclick시 작동함수
-  // const sendFeedback = () => {
-
-  // };
 
   return (
     <section className='flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12'>
@@ -31,16 +27,6 @@ export function Intro() {
       </h1>
       <nav>
         <ul className='flex' style={{ alignItems: 'center' }}>
-        <div className='mr-6'>
-        <Button
-          type='primary'
-          icon={<SmileOutlined />}
-          style={{ fontSize: '16px', fontWeight: 'bold', marginRight: '8px' }}
-          // onClick={sendFeedback}
-        >
-          피드백 보내기
-        </Button>
-      </div>
           <li className='mr-6'>
             <Link as={`/`} href='/' className='hover:underline'>
               홈
