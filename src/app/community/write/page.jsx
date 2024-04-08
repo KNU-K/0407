@@ -9,7 +9,7 @@ export default function Write() {
       <Container>
       <Intro/>
       <Space className='justify-between mb-3'>
-          <h1 style={{ fontSize: 20, fontWeight: 'bolder' }}>커뮤니티</h1>
+          <h1 style={{ fontSize: 20, fontWeight: 'bolder' }}>경험공유</h1>
       </Space>
         <WriteBoard />
       </Container>
