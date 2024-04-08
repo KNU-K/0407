@@ -22,7 +22,7 @@ const JoinForm = () => {
   return (
     <main>
       <Container>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <div>
           <Intro />
           <Space className='justify-between mb-3'>
             <h1 style={{ fontSize: 20, fontWeight: 'bolder' }}>회원가입</h1>
@@ -37,8 +37,10 @@ const JoinForm = () => {
 }
 
 const JoinContainer = ({ children }) => (
-  <div style={{ marginTop: '20px', width: '100%', maxWidth: '400px' }}>
-    {children}
+  <div style={{ display: 'flex', justifyContent: 'center' }}>
+    <div style={{ marginTop: '20px', width: '100%', maxWidth: '400px'}}>
+      {children}
+    </div>
   </div>
 );
 
