@@ -6,6 +6,7 @@ import { Space } from "antd";
 
 import { TopNav } from "@/app/_components/top-nav";
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 export default function Write() {
   const { status } = useSession();
   useEffect(() => {
