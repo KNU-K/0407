@@ -1,9 +1,10 @@
+"use client";
 import Container from "@/app/_components/container";
 import { Intro } from "../../_components/intro";
 import { Space } from "antd";
 import CardContent from "@/app/_components/card-content";
 
-import { TopNav } from "../_components/top-nav";
+import { TopNav } from "../../_components/top-nav";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 export default function cardNews() {
@@ -11,7 +12,7 @@ export default function cardNews() {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      alert("로그인 후 이용해주세요.");
+      alert("로그인 후 이용해주세요");
       window.history.back();
     }
   }, [status]);
