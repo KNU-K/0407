@@ -101,7 +101,7 @@ const Content = ({ params }) => {
                   <div key={item.id} className="py-4 flex items-start">
                     <div className="mr-4">
                       <Text strong>작성자:</Text>
-                      <Text className="text-sm"></Text>
+                      <Text className="text-sm">{item.author}</Text>
                       <Text strong>작성일:</Text>
                       <Text className="text-sm">
                         {new Date(item.created_date).toLocaleString()}

@@ -22,27 +22,29 @@ export function TopNav() {
     <nav className="bg-gray-100 py-4 px-8 flex justify-between items-center relative">
       <div></div> {/* This div will push the buttons to the right */}
       <div className="flex items-center space-x-2 relative">
-        <>
-          <Link href="/login" passHref>
-            <Button
-              type="primary"
-              icon={<LoginOutlined />}
-              className="bg-blue-500 hover:bg-blue-600"
-            >
-              로그인
-            </Button>
-          </Link>
-          <Link href="/join" passHref>
-            <Button
-              type="primary"
-              icon={<UserAddOutlined />}
-              className="bg-blue-500 hover:bg-blue-600"
-            >
-              회원가입
-            </Button>
-          </Link>
-        </>
-        {status === "authenticated" && (
+        {status === "loading" && (
+          <>
+            <Link href="/login" passHref>
+              <Button
+                type="primary"
+                icon={<LoginOutlined />}
+                className="bg-blue-500 hover:bg-blue-600"
+              >
+                로그인
+              </Button>
+            </Link>
+            <Link href="/join" passHref>
+              <Button
+                type="primary"
+                icon={<UserAddOutlined />}
+                className="bg-blue-500 hover:bg-blue-600"
+              >
+                회원가입
+              </Button>
+            </Link>
+          </>
+        )}
+        {status === "authenticated" ? (
           <Button
             type="primary"
             onClick={handleLogout}
@@ -51,6 +53,27 @@ export function TopNav() {
           >
             로그아웃
           </Button>
+        ) : (
+          <>
+            <Link href="/login" passHref>
+              <Button
+                type="primary"
+                icon={<LoginOutlined />}
+                className="bg-blue-500 hover:bg-blue-600"
+              >
+                로그인
+              </Button>
+            </Link>
+            <Link href="/join" passHref>
+              <Button
+                type="primary"
+                icon={<UserAddOutlined />}
+                className="bg-blue-500 hover:bg-blue-600"
+              >
+                회원가입
+              </Button>
+            </Link>
+          </>
         )}
         <Button
           type="primary"
@@ -81,7 +104,7 @@ export function TopNav() {
             </div>
             <input
               type="text"
-              placeholder="개발 진행중.."
+              placeholder="개발중"
               className="w-full mt-4 border rounded-lg p-2 focus:outline-none focus:border-blue-500"
             />
           </div>
