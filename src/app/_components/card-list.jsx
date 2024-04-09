@@ -7,8 +7,8 @@ import {
   CardMedia,
   Typography,
   Grid,
-  Button,
 } from '@material-ui/core';
+import { Button } from "@mui/material";
 import Link from 'next/link';
 
 const NewsComponent = () => {
@@ -100,7 +100,8 @@ const NewsComponent = () => {
         ))}
       </Grid>
       <div
-        style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}
+        style={{ display: 'flex', justifyContent: 'center',
+         marginTop: '10px', marginBottom: '10px' }}
       >
         {[...Array(totalPages)].map((_, index) => (
           <Button key={index} onClick={() => handlePageChange(index + 1)}>

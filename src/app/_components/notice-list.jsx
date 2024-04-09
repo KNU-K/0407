@@ -141,12 +141,12 @@ const App = () => {
           <TableBody>{getPageData()}</TableBody>
         </Table>
       </TableContainer>
-      <div>
+      <div style={{ display: 'flex', justifyContent: 'center',
+       marginTop: '10px', marginBottom: '10px' }}>
         {[...Array(pageCount)].map((_, index) => (
           <Button
             key={index}
             onClick={() => handlePageChange(index + 1)}
-            style={{ margin: "0 5px" }}
           >
             {index + 1}
           </Button>
