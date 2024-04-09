@@ -141,7 +141,7 @@ const App = () => {
           <TableBody>{getPageData()}</TableBody>
         </Table>
       </TableContainer>
-      <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
+      <div>
         {[...Array(pageCount)].map((_, index) => (
           <Button
             key={index}

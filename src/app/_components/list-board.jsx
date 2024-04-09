@@ -6,6 +6,7 @@ import Link from "next/link";
 import axios from "axios";
 import { EditOutlined } from "@ant-design/icons";
 import { Spin, Button, Table } from "antd";
+import { useState } from "react";
 function convertToKST(dateString) {
   // ISO 8601 형식의 날짜 문자열을 Date 객체로 변환
   const date = new Date(dateString);
@@ -26,23 +27,29 @@ function convertToKST(dateString) {
   return new Intl.DateTimeFormat("ko-KR", options).format(date);
 }
 export default function CommunityBoard() {
-  React.useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    const response = await axios.get(
-      "https://api.g-start-up.com/api/question/"
-    );
-    console.log(response.data);
-    const dataWithNumber = response.data.data.map((item, index) => {
-      return {
-        ...item,
-        number: index + 1,
-      };
-    });
-    setRows(dataWithNumber);
+  const [pageCount, setPageCount] = useState(1);
+  const [curPageCount, setCurPageCount] = useState(1);
+  const handlePageChange = async (page) => {
+    await setCurPageCount(page);
   };
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(
+        `https://api.g-start-up.com/api/question?pageNumber=${curPageCount}`
+      );
+      console.log(response.data);
+      setPageCount(response.data.page_count);
+      const dataWithNumber = response.data.data.map((item, index) => {
+        return {
+          ...item,
+          number: (curPageCount - 1) * 10 + index + 1,
+        };
+      });
+      setRows(dataWithNumber);
+    };
+    fetchData();
+  }, [curPageCount]);
+
   const [rows, setRows] = React.useState(null);
   if (!rows) {
     return <Spin />;
@@ -91,7 +98,23 @@ export default function CommunityBoard() {
           <Button icon={<EditOutlined />}>글쓰기</Button>
         </Link>
       </div>
-      <Table columns={columns} dataSource={rows} rowKey={"qid"} />
+      <Table
+        columns={columns}
+        dataSource={rows}
+        rowKey={"qid"}
+        pagination={false}
+      />
+      <div style={{ display: "flex", justifyContent: "center", marginTop: 20 }}>
+        {[...Array(pageCount)].map((_, index) => (
+          <Button
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+            style={{ margin: "0 5px" }}
+          >
+            {index + 1}
+          </Button>
+        ))}
+      </div>
     </div>
   );
 }
