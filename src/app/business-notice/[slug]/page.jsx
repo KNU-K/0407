@@ -12,7 +12,7 @@ export default function businessNotice() {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      alert("접근 불가");
+      alert("로그인 후 이용해주세요");
       window.history.back();
     }
   }, [status]);

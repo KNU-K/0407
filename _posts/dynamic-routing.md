@@ -2,7 +2,7 @@
 title: '국내 최대규모의 범부처 창업경진대회'
 excerpt: '2016년부터 9년째 진행되는 도전! K-스타트업은 총 상금 13.9억원과 대통령상, 국무총리상 등 상장 20점을 수여하며, 비즈매칭, 네트워킹 등 다양한 프로그램으로 대한민국 최고의 스타트업들이 참여하는 국내 대표 창업경진대회입니다! 대한민국 최고의 스타트업이 되고싶다면, 지금 바로 도전! K-스타트업에 지원하세요!'
 coverImage: '/assets/blog/dynamic-routing/cover.jpg'
-date: '2020-03-16T05:35:07.322Z'
+date: '2024-03-16T05:35:07.322Z'
 author:
   name: K-Start up
   picture: '/assets/blog/authors/jj.jpeg'

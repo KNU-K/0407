@@ -99,17 +99,16 @@ const Content = ({ params }) => {
                 data.child &&
                 data.child.map((item) => (
                   <div key={item.id} className="py-4 flex items-start">
-                    <div className="mr-4">
-                      <p>
-                        <Text strong>작성자:</Text>
-                        <Text className="text-sm">{item.author}</Text>
-                      </p>
-                      <Text className="text-sm">
-                        {new Date(item.created_date).toLocaleString()}
-                      </Text>
+                    <div style={{ border: '1px solid #ccc', borderRadius: '5px', padding: '10px', width: '100%' }}>
+                      <div style={{ marginBottom: '10px' }}>
+                      <Text>작성자: </Text>
+                      <Text className="text-sm">{item.author}</Text>
+                      <Text className="text-sm"> [{new Date(item.created_date).toLocaleString()}]</Text>
+                      </div>
+                      <hr style={{ marginBottom: '10px' }} />
                       <Paragraph className="text-sm">{item.content}</Paragraph>
                     </div>
-                  </div>
+                </div>
                 ))}
             </div>
             <form className="CommentList__form" autoComplete="off">
