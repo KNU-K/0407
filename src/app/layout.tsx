@@ -3,6 +3,7 @@ import { CMS_NAME, HOME_OG_IMAGE_URL } from "@/lib/constants";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
+
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import AuthProvider from "@/lib/auth/auth-provider";
@@ -12,9 +13,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: `G-Start Up`,
-  description: `A statically generated blog example using Next.js and ${CMS_NAME}.`,
+  description: `다양한 국적과 문화 속에서 함께 성장하는 창업자들을 위한 플랫폼`,
   openGraph: {
-    images: [HOME_OG_IMAGE_URL],
+    images: "/images/cover.png",
   },
 };
 
