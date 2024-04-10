@@ -15,9 +15,15 @@ export const metadata: Metadata = {
   title: `G-Start Up`,
   description: `다양한 국적과 문화 속에서 함께 성장하는 창업자들을 위한 플랫폼`,
   openGraph: {
-    images: "/images/cover.png",
+    images: [
+      {
+        url: HOME_OG_IMAGE_URL,
+      }
+    ]
   },
 };
+
+
 
 export default function RootLayout({
   children,
