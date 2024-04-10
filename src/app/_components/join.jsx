@@ -89,7 +89,7 @@ const Signup = ({ onFinish }) => {
             >
               <Input
                 type="email"
-                placeholder="이메일"
+                placeholder="이메일(아이디)"
                 onChange={(e) => handleInputChange('email', e.target.value)}
                 style={{ height: '60px' }}
               />
