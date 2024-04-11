@@ -22,6 +22,45 @@ const Signup = ({ onFinish }) => {
   const [visibleServiceModal, setVisibleServiceModal] = useState(false);
   const [visiblePrivacyModal, setVisiblePrivacyModal] = useState(false);
 
+  const handleFormFinish = () => {
+    if (step === 1) {
+      handleNextButtonClick();
+    } else {
+      if (!formData.serviceAgreement || !formData.privacyPolicy) {
+        alert('서비스 이용약관과 개인정보 수집 및 동의에 모두 동의해주세요!');
+        return;
+      }
+      handleFormSubmit();
+    }
+  };
+
+  // 전화번호 유효성 검사 함수
+  const isPhoneNumberValid = (phoneNumber) => {
+    const phoneNumberRegex = /^\d{3}-\d{3,4}-\d{4}$/;
+    return phoneNumberRegex.test(phoneNumber);
+  };
+
+  // 전화번호 입력값 변경 시 처리
+  const handleTelInputChange = (e) => {
+    const telValue = e.target.value;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      tel: telValue,
+    }));
+  };
+
+  // 다음으로 버튼 클릭 이벤트 처리
+  const handleNextButtonClick = () => {
+    if (step === 1) {
+      if (!isPhoneNumberValid(formData.tel)) {
+        alert('올바른 전화번호 형식을 입력해주세요.');
+        return;
+      } else {
+        setStep(2);
+      }
+    }
+  };
+
   const handleInputChange = (key, value) => {
     setFormData({
       ...formData,
@@ -32,10 +71,6 @@ const Signup = ({ onFinish }) => {
   const handleFormSubmit = async () => {
     try {
       setLoading(true);
-      if (!formData.serviceAgreement || !formData.privacyPolicy) {
-        alert('서비스 이용약관과 개인정보 수집 및 동의에 모두 동의해주세요!');
-        return;
-      }
       await onFinish(formData);
       console.log('회원가입이 성공적으로 완료되었습니다.');
     } catch (error) {
@@ -69,11 +104,12 @@ const Signup = ({ onFinish }) => {
         </Title>
       </div>
       <Form
-        name={step === 1 ? 'signup_form_step1' : 'signup_form_step2'}
-        initialValues={{ remember: true }}
-        onFinish={step === 1 ? () => setStep(2) : handleFormSubmit}
-        style={{ width: '500px', transition: 'all 0.3s' }}
-      >
+  name={step === 1 ? 'signup_form_step1' : 'signup_form_step2'}
+  initialValues={{ remember: true }}
+  onFinish={handleFormFinish}
+  style={{ width: '500px', transition: 'all 0.3s' }}
+>
+
         {step === 1 ? (
           <>
             <Form.Item
@@ -148,7 +184,8 @@ const Signup = ({ onFinish }) => {
             >
               <Input
                 placeholder="전화번호(000-0000-0000)"
-                onChange={(e) => handleInputChange('tel', e.target.value)}
+                // onChange={(e) => handleInputChange('tel', e.target.value)}
+                onChange={handleTelInputChange}
                 style={{ height: '60px' }}
               />
             </Form.Item>
@@ -216,6 +253,7 @@ const Signup = ({ onFinish }) => {
                 transition: 'transform 0.3s',
                 // marginBottom: '130px'
               }}
+              // onClick={handleNextButtonClick} 
             >
               {step === 1 ? '다음으로' : '가입완료'}
             </Button>
