@@ -32,6 +32,10 @@ const Signup = ({ onFinish }) => {
   const handleFormSubmit = async () => {
     try {
       setLoading(true);
+      if (!formData.serviceAgreement || !formData.privacyPolicy) {
+        alert('서비스 이용약관과 개인정보 수집 및 동의에 모두 동의해주세요!');
+        return;
+      }
       await onFinish(formData);
       console.log('회원가입이 성공적으로 완료되었습니다.');
     } catch (error) {
