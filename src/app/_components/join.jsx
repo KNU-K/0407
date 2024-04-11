@@ -21,6 +21,22 @@ const Signup = ({ onFinish }) => {
   });
   const [visibleServiceModal, setVisibleServiceModal] = useState(false);
   const [visiblePrivacyModal, setVisiblePrivacyModal] = useState(false);
+  // 비밀번호 형식을 지정하는 정규표현식
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+// 비밀번호 입력값 변경 시 처리
+const handlePasswordInputChange = (e) => {
+  const passwordValue = e.target.value;
+  setFormData((prevFormData) => ({
+    ...prevFormData,
+    password: passwordValue,
+  }));
+};
+
+// 비밀번호 유효성 검사 함수
+const isPasswordValid = (password) => {
+  return passwordRegex.test(password);
+};
 
   const handleFormFinish = () => {
     if (step === 1) {
@@ -50,16 +66,20 @@ const Signup = ({ onFinish }) => {
   };
 
   // 다음으로 버튼 클릭 이벤트 처리
-  const handleNextButtonClick = () => {
-    if (step === 1) {
-      if (!isPhoneNumberValid(formData.tel)) {
-        alert('올바른 전화번호 형식을 입력해주세요.');
-        return;
-      } else {
-        setStep(2);
-      }
+// 다음으로 버튼 클릭 이벤트 처리
+const handleNextButtonClick = () => {
+  if (step === 1) {
+    if (!isPhoneNumberValid(formData.tel)) {
+      alert('올바른 전화번호 형식을 입력해주세요.');
+      return;
+    } else if (!isPasswordValid(formData.password)) {
+      alert('비밀번호는 최소 8자 이상이며, 대문자, 소문자, 숫자, 특수문자가 최소한 하나씩 포함되어야 합니다.');
+      return;
+    } else {
+      setStep(2);
     }
-  };
+  }
+};
 
   const handleInputChange = (key, value) => {
     setFormData({
@@ -135,15 +155,18 @@ const Signup = ({ onFinish }) => {
               />
             </Form.Item>
             <Form.Item
-              name="password"
-              rules={[{ required: true, message: '비밀번호를 입력해주세요!' }]}
-            >
-              <Input.Password
-                placeholder="비밀번호"
-                onChange={(e) => handleInputChange('password', e.target.value)}
-                style={{ height: '60px' }}
-              />
-            </Form.Item>
+  name="password"
+  rules={[
+    { required: true, message: '비밀번호를 입력해주세요!' },
+    { validator: (_, value) => isPasswordValid(value) ? Promise.resolve() : Promise.reject('비밀번호 형식을 확인해주세요. 비밀번호는 최소 8자 이상이며, 대문자, 소문자, 숫자, 특수문자가 최소한 하나씩 포함되어야 합니다.') }
+  ]}
+>
+  <Input.Password
+    placeholder="비밀번호"
+    onChange={handlePasswordInputChange}
+    style={{ height: '60px' }}
+  />
+</Form.Item>
 
             <Form.Item
               name="birthdate"
