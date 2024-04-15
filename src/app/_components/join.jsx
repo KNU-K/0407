@@ -237,25 +237,29 @@ const handleNextButtonClick = () => {
               />
             </Form.Item>
 
-            <Form.Item
-              name="serviceAgreement"
-              valuePropName="checked"
-              rules={[{ required: true, message: '서비스 이용약관에 동의해주세요!' }]}
-            >
-              <Checkbox>
-                서비스 이용약관(필수) <Button type="link" onClick={() => showModal('service')}>보기</Button>
-              </Checkbox>
-            </Form.Item>
+<Form.Item
+  name="serviceAgreement"
+  valuePropName="checked"
+  rules={[{ required: true, message: '서비스 이용약관에 동의해주세요!' }]}
+>
+  <Checkbox
+    onChange={(e) => handleInputChange('serviceAgreement', e.target.checked)}
+  >
+    서비스 이용약관(필수) <Button type="link" onClick={() => showModal('service')}>보기</Button>
+  </Checkbox>
+</Form.Item>
 
-            <Form.Item
-              name="privacyPolicy"
-              valuePropName="checked"
-              rules={[{ required: true, message: '개인정보 수집 및 동의에 동의해주세요!' }]}
-            >
-              <Checkbox>
-                개인정보 수집 및 동의(필수) <Button type="link" onClick={() => showModal('privacy')}>보기</Button>
-              </Checkbox>
-            </Form.Item>
+<Form.Item
+  name="privacyPolicy"
+  valuePropName="checked"
+  rules={[{ required: true, message: '개인정보 수집 및 동의에 동의해주세요!' }]}
+>
+  <Checkbox
+    onChange={(e) => handleInputChange('privacyPolicy', e.target.checked)}
+  >
+    개인정보 수집 및 동의(필수) <Button type="link" onClick={() => showModal('privacy')}>보기</Button>
+  </Checkbox>
+</Form.Item>
 
           </>
         )}
