@@ -22,7 +22,9 @@ const Signup = ({ onFinish }) => {
   const [visibleServiceModal, setVisibleServiceModal] = useState(false);
   const [visiblePrivacyModal, setVisiblePrivacyModal] = useState(false);
   // 비밀번호 형식을 지정하는 정규표현식
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+// const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  //04/15 정규화 방식 변경 : 대문자, 소문자, 숫자 포함 8자 이상(특수문자 조건 삭제)
 
 // 비밀번호 입력값 변경 시 처리
 const handlePasswordInputChange = (e) => {
@@ -73,7 +75,7 @@ const handleNextButtonClick = () => {
       alert('올바른 전화번호 형식을 입력해주세요.');
       return;
     } else if (!isPasswordValid(formData.password)) {
-      alert('비밀번호는 최소 8자 이상이며, 대문자, 소문자, 숫자, 특수문자가 최소한 하나씩 포함되어야 합니다.');
+      alert('비밀번호는 최소 8자 이상이며, 대문자, 소문자, 숫자가 최소한 하나씩 포함되어야 합니다.');
       return;
     } else {
       setStep(2);
@@ -158,7 +160,7 @@ const handleNextButtonClick = () => {
   name="password"
   rules={[
     { required: true, message: '비밀번호를 입력해주세요!' },
-    { validator: (_, value) => isPasswordValid(value) ? Promise.resolve() : Promise.reject('비밀번호 형식을 확인해주세요. 비밀번호는 최소 8자 이상이며, 대문자, 소문자, 숫자, 특수문자가 최소한 하나씩 포함되어야 합니다.') }
+    { validator: (_, value) => isPasswordValid(value) ? Promise.resolve() : Promise.reject('비밀번호 형식을 확인해주세요. 비밀번호는 최소 8자 이상이며, 대문자, 소문자, 숫자가 최소한 하나씩 포함되어야 합니다.') }
   ]}
 >
   <Input.Password
