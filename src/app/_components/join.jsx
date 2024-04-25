@@ -23,8 +23,11 @@ const Signup = ({ onFinish }) => {
   const [visiblePrivacyModal, setVisiblePrivacyModal] = useState(false);
   // 비밀번호 형식을 지정하는 정규표현식
 // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
   //04/15 정규화 방식 변경 : 대문자, 소문자, 숫자 포함 8자 이상(특수문자 조건 삭제)
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+  //04/25 정규화 방식 변경 : 기존과 모두 동일하지만, 기호를 입력했을 때 비밀번호형식을
+  //확인해달라고 뜨던 오류 수정
 
 // 비밀번호 입력값 변경 시 처리
 const handlePasswordInputChange = (e) => {
