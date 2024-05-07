@@ -9,6 +9,7 @@ import {
   UserAddOutlined,
   MessageOutlined,
 } from "@ant-design/icons";
+import GoogleTranslate from "./translate";
 
 export function TopNav() {
   const { data: session, status } = useSession();
@@ -22,6 +23,7 @@ export function TopNav() {
 
   return (
     <nav className="bg-gray-100 py-4 px-8 flex justify-between items-center relative">
+      <GoogleTranslate />
       <div></div> {/* This div will push the buttons to the right */}
       <div className="flex items-center space-x-2 relative">
         {status === "authenticated" ? (
@@ -63,6 +65,7 @@ export function TopNav() {
         >
           챗봇
         </Button>
+
         {showChatbot && (
           <div className="absolute z-50 top-full right-0 mt-1 w-80 bg-white border border-gray-300 rounded-lg shadow-md p-4">
             <div className="overflow-y-auto max-h-60">

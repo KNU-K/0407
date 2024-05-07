@@ -3,7 +3,6 @@ import { CMS_NAME, HOME_OG_IMAGE_URL } from "@/lib/constants";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-
 import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import AuthProvider from "@/lib/auth/auth-provider";
@@ -18,12 +17,10 @@ export const metadata: Metadata = {
     images: [
       {
         url: HOME_OG_IMAGE_URL,
-      }
-    ]
+      },
+    ],
   },
 };
-
-
 
 export default function RootLayout({
   children,

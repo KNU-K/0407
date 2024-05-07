@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 번역바 숨기기 */
+body {
+  top: 0px !important;
+}
+
+body > .skiptranslate > iframe.skiptranslate {
+  display: none !important;
+  visibility: hidden !important;
+}
+/* 번역바 숨기기 */
+
+.goog-te-gadget-icon {
+  display: none;
+}
+
+.goog-te-gadget-simple {
+  background-color: #ecebf0 !important;
+  border: 0 !important;
+  font-size: 10pt;
+  font-weight: 800;
+  display: inline-block;
+  padding: 10px 10px !important;
+  cursor: pointer;
+  zoom: 1;
+}
+
+.goog-te-gadget-simple span {
+  color: #3e3065 !important;
+}
+
+#google_translate_element {
+  margin-top: 10px;
+  height: 35px;
+  overflow: hidden;
+}
