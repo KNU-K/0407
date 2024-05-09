@@ -38,7 +38,7 @@ export default function Home() {
   useEffect(() => {
     const getData = async (region) => {
       const { data } = await axios.get(
-        `http://apis.data.go.kr/B552735/kisedSlpService/getCenterList?serviceKey=${process.env.NEXT_PUBLIC_API_KEY}&cond[regin_clss::LIKE]=${region}&page=1&perPage=1000&returnType=json`
+        `https://apis.data.go.kr/B552735/kisedSlpService/getCenterList?serviceKey=${process.env.NEXT_PUBLIC_API_KEY}&cond[regin_clss::LIKE]=${region}&page=1&perPage=1000&returnType=json`
       );
       setList(data.data);
       setLat(data.data[0].latde);
