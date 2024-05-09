@@ -16,7 +16,6 @@ export default function Sponsor() {
         <Space className="justify-between mb-3">
           <h1 style={{ fontSize: 20, fontWeight: "bolder" }}>스폰서쉽</h1>
         </Space>
-        <SpaceCard />
       </Container>
     </main>
   );
