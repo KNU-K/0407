@@ -1,15 +1,5 @@
 "use client";
-import { CMS_NAME } from "@/lib/constants";
-import { Button } from "antd";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-import { useEffect } from "react";
-import { sign } from "crypto";
-import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import Spinner from "./shared/spinner";
-import { Pointer } from "lucide-react";
-import { SmileOutlined } from "@ant-design/icons";
 
 export function Intro() {
   const routeHomePageHandler = (e: any) => {
@@ -28,7 +18,7 @@ export function Intro() {
       <nav>
         <ul className="flex" style={{ alignItems: "center" }}>
           <li className="mr-6">
-            <Link as={`/`} href="/" className="hover:underline">
+            <Link as={`/`} href="/" className="hover:underline font-bold">
               홈
             </Link>
           </li>
@@ -36,7 +26,7 @@ export function Intro() {
             <Link
               as={`/business-notice`}
               href="/business-notice"
-              className="hover:underline"
+              className="hover:underline font-bold"
             >
               사업공고
             </Link>
@@ -45,13 +35,17 @@ export function Intro() {
             <Link
               as={`/card-news`}
               href="/card-news"
-              className="hover:underline"
+              className="hover:underline font-bold"
             >
               카드뉴스
             </Link>
           </li>
           <li className="mr-6">
-            <Link as={`/space`} href="/space" className="hover:underline">
+            <Link
+              as={`/space`}
+              href="/space"
+              className="hover:underline font-bold"
+            >
               창업공간
             </Link>
           </li>
@@ -59,9 +53,18 @@ export function Intro() {
             <Link
               as={`/community`}
               href="/community"
-              className="hover:underline"
+              className="hover:underline font-bold"
             >
               경험공유
+            </Link>
+          </li>
+          <li className="mr-6">
+            <Link
+              as={`/sponsor`}
+              href="/sponsor"
+              className="hover:underline font-bold"
+            >
+              스폰서쉽
             </Link>
           </li>
         </ul>

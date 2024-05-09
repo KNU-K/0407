@@ -8,6 +8,7 @@ import {
   LoginOutlined,
   UserAddOutlined,
   MessageOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
 import GoogleTranslate from "./translate";
 
@@ -22,19 +23,30 @@ export function TopNav() {
   if (status === "loading") return null;
 
   return (
-    <nav className="bg-gray-100 py-4 px-8 flex justify-between items-center relative">
+    <nav className="top-nav bg-gray-100 py-4 px-8 flex justify-between items-center relative">
       <GoogleTranslate />
-      <div></div> {/* This div will push the buttons to the right */}
+      <div></div>
       <div className="flex items-center space-x-2 relative">
         {status === "authenticated" ? (
-          <Button
-            type="primary"
-            onClick={handleLogout}
-            icon={<LogoutOutlined />}
-            className="bg-blue-500 hover:bg-blue-600"
-          >
-            로그아웃
-          </Button>
+          <>
+            <Link href="/mypage" passHref>
+              <Button
+                type="primary"
+                icon={<SettingOutlined />}
+                className="bg-blue-500 hover:bg-blue-600"
+              >
+                마이페이지
+              </Button>
+            </Link>
+            <Button
+              type="primary"
+              onClick={handleLogout}
+              icon={<LogoutOutlined />}
+              className="bg-blue-500 hover:bg-blue-600"
+            >
+              로그아웃
+            </Button>
+          </>
         ) : (
           <>
             <Link href="/login" passHref>

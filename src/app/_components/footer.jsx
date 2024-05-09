@@ -48,7 +48,7 @@ const Footer = () => {
           >
             피드백 보내기
           </Button>
-          {/* 모달 */}
+
           <Modal
             title="피드백 보내기"
             open={isModalVisible}

@@ -5,6 +5,7 @@ import { MoreStories } from "@/app/_components/more-stories";
 import { getAllPosts } from "@/lib/api";
 import { SessionProvider } from "next-auth/react";
 import { TopNav } from "./_components/top-nav";
+import Footer from "@/app/_components/footer";
 
 export default function Index() {
   const allPosts = getAllPosts();
@@ -15,20 +16,23 @@ export default function Index() {
 
   return (
     <main>
-      <TopNav />
+      {/* <TopNav /> */}
 
       <Container>
         <Intro />
-        <HeroPost
+        {/* 메인사진있던 위치 */}
+        {/* <HeroPost
           title={heroPost.title}
           coverImage={heroPost.coverImage}
           date={heroPost.date}
           author={heroPost.author}
           slug={heroPost.slug}
           excerpt={heroPost.excerpt}
-        />
-        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+        /> */}
+        {/* {morePosts.length > 0 && <MoreStories posts={morePosts} />} */}
       </Container>
+
+      {/* <Footer /> */}
     </main>
   );
 }

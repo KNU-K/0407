@@ -15,7 +15,7 @@ export default function Index() {
 
   return (
     <main>
-      <TopNav />
+      {/* <TopNav /> */}
       <Container>
         <Intro />
         <Space className="justify-between mb-3">

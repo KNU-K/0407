@@ -37,3 +37,18 @@ body > .skiptranslate > iframe.skiptranslate {
   height: 35px;
   overflow: hidden;
 }
+
+html {
+  transform: scale(0.75);
+  transform-origin: top;
+}
+
+footer {
+  transform: scale(1.33333);
+  transform-origin: top;
+}
+
+.top-nav {
+  transform: scale(1.33333);
+  transform-origin: top;
+}

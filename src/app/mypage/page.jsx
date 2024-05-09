@@ -6,7 +6,7 @@ import { Space } from "antd";
 import axios from "axios";
 import { TopNav } from "@/app/_components/top-nav";
 
-const JoinForm = () => {
+const MyPage = () => {
   const handleFormSubmit = async (formData) => {
     try {
       await axios.post("https://api.g-start-up.com/api/user", formData);
@@ -28,7 +28,7 @@ const JoinForm = () => {
         <div>
           <Intro />
           <Space className="justify-between mb-3">
-            <h1 style={{ fontSize: 20, fontWeight: "bolder" }}>회원가입</h1>
+            <h1 style={{ fontSize: 20, fontWeight: "bolder" }}>마이페이지</h1>
           </Space>
           <JoinContainer>
             <Join onFinish={handleFormSubmit} />
@@ -54,4 +54,4 @@ const JoinContainer = ({ children }) => (
   </div>
 );
 
-export default JoinForm;
+export default MyPage;

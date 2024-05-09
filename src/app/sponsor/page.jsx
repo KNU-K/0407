@@ -6,7 +6,7 @@ import { Avatar, Card, Flex, Space } from "antd";
 import { useState } from "react";
 import { TopNav } from "../_components/top-nav";
 
-export default function BSpace() {
+export default function Sponsor() {
   const [cnt, setCnt] = useState(0);
   return (
     <main>
@@ -14,11 +14,9 @@ export default function BSpace() {
       <Container>
         <Intro />
         <Space className="justify-between mb-3">
-          <h1 style={{ fontSize: 20, fontWeight: "bolder" }}>창업공간</h1>
+          <h1 style={{ fontSize: 20, fontWeight: "bolder" }}>스폰서쉽</h1>
         </Space>
-        <div>
-          <SpaceCard />
-        </div>
+        <SpaceCard />
       </Container>
     </main>
   );

@@ -9,7 +9,7 @@ import { TopNav } from "@/app/_components/top-nav";
 export default function Community() {
   return (
     <main>
-      <TopNav />
+      {/* <TopNav /> */}
       <Container>
         <Intro />
         {/* <h1 style={{ fontSize: '30px', fontWeight: 'bold' }}>커�?�니?��</h1> */}
