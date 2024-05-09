@@ -71,8 +71,8 @@ export default function RootLayout({
               <AntdRegistry>{children}</AntdRegistry>
             </AuthProvider>
           </div>
+          <Footer />
         </body>
-        <Footer />
       </SessionProvider>
     </html>
   );

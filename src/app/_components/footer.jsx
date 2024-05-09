@@ -33,7 +33,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-gray-100 border-t border-gray-200 py-6">
+    <footer className="footer bg-gray-100 border-t border-gray-200 py-6">
       <Container>
         <div className="flex items-center justify-between">
           <h3 className="text-4xl lg:text-2xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-4 lg:mb-0 lg:pr-4 lg:w-1/2">
@@ -48,7 +48,7 @@ const Footer = () => {
           >
             피드백 보내기
           </Button>
-
+          {/* 모달 */}
           <Modal
             title="피드백 보내기"
             open={isModalVisible}
