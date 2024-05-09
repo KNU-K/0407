@@ -23,7 +23,7 @@ export function Intro() {
         className="text-5xl md:text-7xl font-bold tracking-tighter leading-tight md:pr-8"
         onClick={(e: any) => routeHomePageHandler(e)}
       >
-        G - Start Up
+        <img src="/images/mainlogo.png"></img>
       </h1>
       <nav>
         <ul className="flex" style={{ alignItems: "center" }}>
