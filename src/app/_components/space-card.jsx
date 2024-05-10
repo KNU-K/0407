@@ -171,7 +171,7 @@ export default function Home() {
         )}
       </div>
       <>
-        <Script src={KAKAO_SDK_URL} strategy="afterInteractive" />
+        <Script src={KAKAO_SDK_URL} strategy="beforeInteractive" />
         <Map
           center={{
             lat: lat,
