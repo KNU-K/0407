@@ -34,11 +34,10 @@ export default function Home() {
   const KAKAO_SDK_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_KEY}&autoload=false`;
   const [list, setList] = useState([]);
   const [modal, setModal] = useState(null);
-  const [modalData, setModalData] = useState(null);
   useEffect(() => {
     const getData = async (region) => {
       const { data } = await axios.get(
-        `https://apis.data.go.kr/B552735/kisedSlpService/getCenterList?serviceKey=${process.env.NEXT_PUBLIC_API_KEY}&cond[regin_clss::LIKE]=${region}&page=1&perPage=1000&returnType=json`
+        `http://apis.data.go.kr/B552735/kisedSlpService/getCenterList?serviceKey=${process.env.NEXT_PUBLIC_API_KEY}&cond[regin_clss::LIKE]=${region}&page=1&perPage=1000&returnType=json`
       );
       setList(data.data);
       setLat(data.data[0].latde);
@@ -64,6 +63,8 @@ export default function Home() {
               display: "none",
             },
           }}
+          mask={false}
+          centered
         >
           <h1>{modal.cntr_nm}</h1>
           <div
@@ -82,8 +83,10 @@ export default function Home() {
           <div
             style={{
               width: "350px",
+              height: "100vh",
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
+              gridTemplateRows: "repeat(auto-fill, 1fr)",
             }}
           >
             {regionList.map((region) => (
@@ -92,7 +95,11 @@ export default function Home() {
                 onClick={() => setRegion(region)}
                 style={{
                   padding: "4px",
+                  border: "1px solid #e0e0e0",
+                  marginRight: "-1px",
+                  marginTop: "-1px",
                 }}
+                className="region"
               >
                 {region}
               </button>
@@ -120,8 +127,9 @@ export default function Home() {
             </div>
             <div
               style={{
-                height: "calc(100vh - 60px)",
-                overflowY: "auto",
+                height: "calc(100vh - 44.5px)",
+                overflowY: "scroll",
+                overflowX: "hidden",
               }}
             >
               <div>
@@ -132,7 +140,10 @@ export default function Home() {
                       padding: "10px",
                       width: "100%",
                       textAlign: "left",
+                      border: "1px solid #e0e0e0",
+                      marginBottom: "-1px",
                     }}
+                    className="card"
                     onClick={() => {
                       setLat(item.latde);
                       setLng(item.lgtde);
@@ -156,7 +167,7 @@ export default function Home() {
             lat: lat,
             lng: lng,
           }}
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: "1100px", height: "100%" }}
           level={4}
         >
           {list.map((item, index) => (

@@ -52,3 +52,17 @@ footer {
   transform: scale(1.33333);
   transform-origin: top;
 }
+
+.region:hover {
+  background: #f0f0f0;
+}
+.region:last-child {
+  border-bottom: none !important;
+}
+.card:hover {
+  background: #f0f0f0;
+}
+
+.custom-button {
+  font-size: 12px !important;
+}

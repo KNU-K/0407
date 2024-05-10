@@ -23,17 +23,17 @@ export function TopNav() {
   if (status === "loading") return null;
 
   return (
-    <nav className="top-nav bg-gray-100 py-4 px-8 flex justify-between items-center relative">
+    <nav className="top-nav bg-gray-100 py-2 px-4 flex justify-between items-center relative text-sm">
       <GoogleTranslate />
       <div></div>
-      <div className="flex items-center space-x-2 relative">
+      <div className="flex items-center space-x-1 relative">
         {status === "authenticated" ? (
           <>
             <Link href="/mypage" passHref>
               <Button
                 type="primary"
                 icon={<SettingOutlined />}
-                className="bg-blue-500 hover:bg-blue-600"
+                className="bg-blue-500 hover:bg-blue-600 text-xs py-1 px-2 custom-button"
               >
                 마이페이지
               </Button>
@@ -42,7 +42,7 @@ export function TopNav() {
               type="primary"
               onClick={handleLogout}
               icon={<LogoutOutlined />}
-              className="bg-blue-500 hover:bg-blue-600"
+              className="bg-blue-500 hover:bg-blue-600 text-xs py-1 px-2 custom-button"
             >
               로그아웃
             </Button>
@@ -53,7 +53,7 @@ export function TopNav() {
               <Button
                 type="primary"
                 icon={<LoginOutlined />}
-                className="bg-blue-500 hover:bg-blue-600"
+                className="bg-blue-500 hover:bg-blue-600 text-xs py-1 px-2 custom-button"
               >
                 로그인
               </Button>
@@ -62,7 +62,7 @@ export function TopNav() {
               <Button
                 type="primary"
                 icon={<UserAddOutlined />}
-                className="bg-blue-500 hover:bg-blue-600"
+                className="bg-blue-500 hover:bg-blue-600 text-xs py-1 px-2 custom-button"
               >
                 회원가입
               </Button>
@@ -73,14 +73,14 @@ export function TopNav() {
           type="primary"
           onClick={() => setShowChatbot(!showChatbot)} // Toggle chatbot visibility
           icon={<MessageOutlined />}
-          className="bg-blue-500 hover:bg-blue-600"
+          className="bg-blue-500 hover:bg-blue-600 text-xs py-1 px-2 custom-button"
         >
           챗봇
         </Button>
 
         {showChatbot && (
-          <div className="absolute z-50 top-full right-0 mt-1 w-80 bg-white border border-gray-300 rounded-lg shadow-md p-4">
-            <div className="overflow-y-auto max-h-60">
+          <div className="absolute z-50 top-full right-0 mt-1 w-64 bg-white border border-gray-300 rounded-lg shadow-md p-3">
+            <div className="overflow-y-auto max-h-48">
               {/* Chat messages go here */}
               <div className="text-left">
                 <div className="flex justify-start mb-2">
@@ -100,7 +100,7 @@ export function TopNav() {
             <input
               type="text"
               placeholder="개발중"
-              className="w-full mt-4 border rounded-lg p-2 focus:outline-none focus:border-blue-500"
+              className="w-full mt-2 border rounded-lg p-1 focus:outline-none focus:border-blue-500 text-xs"
             />
           </div>
         )}

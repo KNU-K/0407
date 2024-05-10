@@ -14,9 +14,9 @@ export default function BSpace() {
       <Container>
         <Intro />
         <Space className="justify-between mb-3">
-          <h1 style={{ fontSize: 20, fontWeight: "bolder" }}>창업공간</h1>
+          <h1 style={{ fontSize: 20, fontWeight: "bolder" }}>창업공간찾기</h1>
         </Space>
-        <div>
+        <div style={{ marginTop: "20px", marginRight: "80px" }}>
           <SpaceCard />
         </div>
       </Container>
