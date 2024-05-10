@@ -123,7 +123,7 @@ export default function Home() {
               <button onClick={() => setRegion(null)}>
                 <LeftOutlined />
               </button>
-              <p>{region}</p>
+              <p style={{ fontWeight: "bold", fontSize: "18px" }}>{region}</p>
             </div>
             <div
               style={{
@@ -149,10 +149,20 @@ export default function Home() {
                       setLng(item.lgtde);
                     }}
                   >
-                    <p>{index + 1 + ". " + item.cntr_nm}</p>
-                    <p>{item.cntr_type_name}</p>
+                    <p style={{ fontWeight: "bold" }}>
+                      {index + 1 + ". " + item.cntr_nm}
+                    </p>
+                    <p style={{ fontWeight: "bold" }}>{item.cntr_type_name}</p>
                     <p>{item.addr}</p>
-                    <p>{item.hmpg}</p>
+                    <a
+                      href={item.hmpg}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      style={{ color: "blue", textDecoration: "underline" }}
+                    >
+                      {item.hmpg}
+                    </a>
                   </button>
                 ))}
               </div>
