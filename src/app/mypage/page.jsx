@@ -5,6 +5,7 @@ import { Intro } from "../_components/intro";
 import { Space } from "antd";
 import axios from "axios";
 import { TopNav } from "@/app/_components/top-nav";
+import Footer from "@/app/_components/footer";
 
 const MyPage = () => {
   const handleFormSubmit = async (formData) => {
