@@ -3,7 +3,7 @@ import Container from "@/app/_components/container";
 import WriteBoard from "@/app/_components/write-board";
 import { Intro } from "@/app/_components/intro";
 import { Space } from "antd";
-
+import Footer from "@/app/_components/footer";
 import { TopNav } from "@/app/_components/top-nav";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";

@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { TopNav } from "@/app/_components/top-nav";
 import Container from "@/app/_components/container";
 import { Intro } from "../../_components/intro";
+import Footer from "@/app/_components/footer";
 
 const { Title, Text, Paragraph } = Typography;
 

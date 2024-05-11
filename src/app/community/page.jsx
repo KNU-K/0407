@@ -3,7 +3,7 @@ import Container from "@/app/_components/container";
 import Board from "@/app/_components/list-board";
 import { Intro } from "../_components/intro";
 import { Space } from "antd";
-
+import Footer from "@/app/_components/footer";
 import { TopNav } from "@/app/_components/top-nav";
 
 export default function Community() {
