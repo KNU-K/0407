@@ -64,14 +64,14 @@ export default function RootLayout({
           <meta name="theme-color" content="#000" />
           <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
         </head>
-        <TopNav />
         <body className={inter.className}>
+          {/* <TopNav /> */}
           <div className="min-h-screen">
             <AuthProvider>
               <AntdRegistry>{children}</AntdRegistry>
             </AuthProvider>
           </div>
-          <Footer />
+          {/* <Footer /> */}
         </body>
       </SessionProvider>
     </html>

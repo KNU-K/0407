@@ -18,7 +18,7 @@ export default function cardNews() {
   }, [status]);
   return (
     <main>
-      {/* <TopNav /> */}
+      <TopNav />
       <Container>
         <Intro />
         <Space className="justify-between mb-3">
@@ -28,6 +28,7 @@ export default function cardNews() {
         </Space>
         <CardContent />
       </Container>
+      <Footer />
     </main>
   );
 }

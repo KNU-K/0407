@@ -17,7 +17,7 @@ export default function Write() {
   }, [status]);
   return (
     <main>
-      {/* <TopNav /> */}
+      <TopNav />
       <Container>
         <Intro />
         <Space className="justify-between mb-3">
@@ -27,6 +27,7 @@ export default function Write() {
         </Space>
         <WriteBoard />
       </Container>
+      <Footer />
     </main>
   );
 }

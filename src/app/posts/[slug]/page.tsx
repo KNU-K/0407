@@ -9,6 +9,7 @@ import Header from "@/app/_components/header";
 import { PostBody } from "@/app/_components/post-body";
 import { PostHeader } from "@/app/_components/post-header";
 import { TopNav } from "@/app/_components/top-nav";
+import Footer from "@/app/_components/footer";
 
 export default async function Post({ params }: Params) {
   const post = getPostBySlug(params.slug);
@@ -30,6 +31,7 @@ export default async function Post({ params }: Params) {
           <PostBody content={content} />
         </article>
       </Container>
+      <Footer />
     </main>
   );
 }

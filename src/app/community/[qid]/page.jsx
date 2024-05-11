@@ -69,7 +69,7 @@ const Content = ({ params }) => {
 
   return (
     <main>
-      {/* <TopNav /> */}
+      <TopNav />
       <Container>
         <Intro />
         <Space direction="vertical" size={20} style={{ width: "100%" }}>
@@ -145,6 +145,7 @@ const Content = ({ params }) => {
           </div>
         </Space>
       </Container>
+      <Footer />
     </main>
   );
 };

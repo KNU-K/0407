@@ -15,7 +15,7 @@ export default function Index() {
 
   return (
     <main>
-      {/* <TopNav /> */}
+      <TopNav />
       <Container>
         <Intro />
         <Space className="justify-between mb-3">
@@ -25,6 +25,7 @@ export default function Index() {
         </Space>
         <CardList />
       </Container>
+      <Footer />
     </main>
   );
 }

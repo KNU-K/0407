@@ -17,7 +17,7 @@ export default function Index() {
   return (
     <main>
       {/* <TopNav /> */}
-
+      <TopNav />
       <Container>
         <Intro />
         {/* 메인사진있던 위치 */}
@@ -32,7 +32,7 @@ export default function Index() {
         {morePosts.length > 0 && <MoreStories posts={morePosts} />}
       </Container>
 
-      {/* <Footer /> */}
+      <Footer />
     </main>
   );
 }

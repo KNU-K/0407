@@ -10,7 +10,7 @@ export default function BSpace() {
   const [cnt, setCnt] = useState(0);
   return (
     <main>
-      {/* <TopNav /> */}
+      <TopNav />
       <Container>
         <Intro />
         <Space className="justify-between mb-3">
@@ -20,6 +20,7 @@ export default function BSpace() {
           <SpaceCard />
         </div>
       </Container>
+      <Footer />
     </main>
   );
 }

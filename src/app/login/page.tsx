@@ -5,7 +5,7 @@ import { Verified } from "lucide-react";
 
 const LoginPage = () => {
   return (
-    <div className="flex min-h-screen bg-white items-centerw-full">
+    <div className="login-from flex min-h-screen bg-white items-centerw-full">
       <div className={`relative hidden w-1/2 lg:block`}>
         <GradientBg className="absolute top-0 left-0 w-full h-full" />
         <div className="absolute inline-flex items-center gap-1 px-3 py-2 font-semibold text-white border-2 border-white rounded-lg left-5 bottom-5">

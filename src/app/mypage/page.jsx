@@ -23,7 +23,7 @@ const MyPage = () => {
 
   return (
     <main>
-      {/* <TopNav /> */}
+      <TopNav />
       <Container>
         <div>
           <Intro />
@@ -35,6 +35,7 @@ const MyPage = () => {
           </JoinContainer>
         </div>
       </Container>
+      <Footer />
     </main>
   );
 };

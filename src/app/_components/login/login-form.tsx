@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { Alert, Button, Form, Input } from 'antd';
-import { useForm } from 'antd/lib/form/Form';
-import { signIn } from 'next-auth/react';
-import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
-import Router from 'next/router';
-import React, { useCallback, useState } from 'react';
+import { Alert, Button, Form, Input } from "antd";
+import { useForm } from "antd/lib/form/Form";
+import { signIn } from "next-auth/react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import Router from "next/router";
+import React, { useCallback, useState } from "react";
 
 interface ILoginFormValue {
   username: string;
@@ -23,17 +23,17 @@ const LoginForm = () => {
 
     try {
       console.log(value);
-      const response = await signIn('login-credentials', {
+      const response = await signIn("login-credentials", {
         username: value.username,
         password: value.password,
       });
       console.log(response);
-      alert('로그인에 성공했습니다.');
-      //router.push('/'); 
-      window.location.href = '/';
+      // alert('로그인에 성공했습니다.');
+      //router.push('/');
+      window.location.href = "/";
     } catch (error) {
       console.error(error);
-      alert('로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해주세요.');
+      alert("로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해주세요.");
     } finally {
       setIsLoading(false);
     }
@@ -52,11 +52,11 @@ const LoginForm = () => {
 
       <Form<ILoginFormValue>
         form={form}
-        layout='vertical'
-        initialValues={{ username: '', password: '' }}
+        layout="vertical"
+        initialValues={{ username: "", password: "" }}
         onFinish={handleFinish}
       >
-        <div className='mb-3'>
+        <div className="mb-3">
           {/* {router?.query.error === 'CredentialsSignin' ? (
             <>
               <Alert
@@ -69,24 +69,24 @@ const LoginForm = () => {
           )} */}
         </div>
         <Form.Item
-          name='username'
-          rules={[{ required: true, message: '아이디를 입력해주세요' }]}
+          name="username"
+          rules={[{ required: true, message: "아이디를 입력해주세요" }]}
         >
-          <Input size='large' placeholder='아이디' />
+          <Input size="large" placeholder="아이디" />
         </Form.Item>
 
         <Form.Item
-          name='password'
-          rules={[{ required: true, message: '비밀번호를 입력해주세요' }]}
+          name="password"
+          rules={[{ required: true, message: "비밀번호를 입력해주세요" }]}
         >
-          <Input placeholder='비밀번호' type='password' size='large' />
+          <Input placeholder="비밀번호" type="password" size="large" />
         </Form.Item>
 
         <Button
-          size='large'
-          type='primary'
-          htmlType='submit'
-          className='w-full'
+          size="large"
+          type="primary"
+          htmlType="submit"
+          className="w-full"
           loading={isLoading}
         >
           로그인

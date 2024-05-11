@@ -30,7 +30,8 @@
     "src/app/_components/board.jsx",
     "src/app/posts/[qid]/page.jsx",
     "src/app/_components/footer.jsx",
-    "src/app/_components/top-nav.jsx"
+    "src/app/_components/top-nav.jsx",
+    "src/app/card-news/page.jsx"
   ],
   "exclude": ["node_modules"]
 }

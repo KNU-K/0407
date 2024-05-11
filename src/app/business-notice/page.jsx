@@ -9,7 +9,7 @@ import { TopNav } from "../_components/top-nav";
 export default function businessNotice() {
   return (
     <main>
-      {/* <TopNav /> */}
+      <TopNav />
       <Container>
         <Intro />
         <Space className="justify-between mb-3">
@@ -19,7 +19,7 @@ export default function businessNotice() {
         </Space>
         <NoticeList />
       </Container>
-      {/* <Footer /> */}
+      <Footer />
     </main>
   );
 }
