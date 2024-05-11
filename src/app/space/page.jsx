@@ -5,6 +5,7 @@ import { Intro } from "../_components/intro";
 import { Avatar, Card, Flex, Space } from "antd";
 import { useState } from "react";
 import { TopNav } from "../_components/top-nav";
+import Footer from "@/app/_components/footer";
 
 export default function BSpace() {
   const [cnt, setCnt] = useState(0);

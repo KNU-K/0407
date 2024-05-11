@@ -9,6 +9,7 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Card, Flex, Space } from "antd";
 import { TopNav } from "../_components/top-nav";
+import Footer from "@/app/_components/footer";
 
 export default function Index() {
   const { Meta } = Card;

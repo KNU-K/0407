@@ -7,6 +7,8 @@ import Footer from "@/app/_components/footer";
 import { TopNav } from "@/app/_components/top-nav";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import Footer from "@/app/_components/footer";
+
 export default function Write() {
   const { status } = useSession();
   useEffect(() => {

@@ -3,7 +3,7 @@ import Container from "@/app/_components/container";
 import { Intro } from "../../_components/intro";
 import { Space } from "antd";
 import NoticeContent from "@/app/_components/notice-content";
-
+import Footer from "@/app/_components/footer";
 import { TopNav } from "../../_components/top-nav";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
