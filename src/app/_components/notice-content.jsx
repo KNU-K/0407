@@ -1,32 +1,45 @@
-'use client'
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Typography, Paper, Button, Divider, Box, IconButton, Table, TableBody, TableCell, TableContainer, TableRow } from '@mui/material';
-import { styled } from '@mui/system';
-import { usePathname } from 'next/navigation';
-import { blue } from '@mui/material/colors';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { getSession } from 'next-auth/react';
+"use client";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import {
+  Typography,
+  Paper,
+  Button,
+  Divider,
+  Box,
+  IconButton,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+} from "@mui/material";
+import { styled } from "@mui/system";
+import { usePathname } from "next/navigation";
+import { blue } from "@mui/material/colors";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { getSession } from "next-auth/react";
+import { Space } from "antd";
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
   marginBottom: theme.spacing(2),
-  textAlign: 'center',
+  textAlign: "center",
 }));
 
 const StyledOutlinedButton = styled(Button)(({ theme }) => ({
   marginRight: theme.spacing(2), // Increased margin for spacing between attachment buttons
   marginBottom: theme.spacing(1),
-  '&:hover': {
+  "&:hover": {
     backgroundColor: blue[500],
-    color: '#fff',
+    color: "#fff",
   },
 }));
 
 const BusinessNoticePage = () => {
   const pathname = usePathname();
-  const lastSlashIndex = pathname.lastIndexOf('/');
+  const lastSlashIndex = pathname.lastIndexOf("/");
   const articleId = pathname.substring(lastSlashIndex + 1);
   const [articleData, setArticleData] = useState(null);
   const [liked, setLiked] = useState(false);
@@ -34,47 +47,57 @@ const BusinessNoticePage = () => {
   useEffect(() => {
     const fetchArticleData = async () => {
       try {
-        const token = `Bearer ${(await getSession()).user.id}`
-        const response = await axios.get(`https://api.g-start-up.com/api/article/${articleId}`, {
-          headers: {
-            Authorization: token
+        const token = `Bearer ${(await getSession()).user.id}`;
+        const response = await axios.get(
+          `https://api.g-start-up.com/api/article/${articleId}`,
+          {
+            headers: {
+              Authorization: token,
+            },
           }
-        });
+        );
         setArticleData(response.data);
         setLiked(response.data.user_likes === "1");
       } catch (error) {
-        console.error('Error fetching article data:', error);
+        console.error("Error fetching article data:", error);
       }
     };
-  
+
     if (articleId) {
       fetchArticleData();
     }
   }, [articleId]);
 
   const handleAttachmentButtonClick = (url) => {
-    window.open(`https://www.k-startup.go.kr${url}`, '_blank');
+    window.open(`https://www.k-startup.go.kr${url}`, "_blank");
   };
 
   const handleLikeClick = async () => {
     try {
-      const token = `Bearer ${(await getSession()).user.id}`
+      const token = `Bearer ${(await getSession()).user.id}`;
       if (!liked) {
-        await axios.post(`https://api.g-start-up.com/api/article/${articleId}/like`, null, {
-          headers: {
-            Authorization: token
+        await axios.post(
+          `https://api.g-start-up.com/api/article/${articleId}/like`,
+          null,
+          {
+            headers: {
+              Authorization: token,
+            },
           }
-        });
+        );
       } else {
-        await axios.delete(`https://api.g-start-up.com/api/article/${articleId}/like`, {
-          headers: {
-            Authorization: token
+        await axios.delete(
+          `https://api.g-start-up.com/api/article/${articleId}/like`,
+          {
+            headers: {
+              Authorization: token,
+            },
           }
-        });
+        );
       }
       setLiked(!liked);
     } catch (error) {
-      console.error('Error toggling like:', error);
+      console.error("Error toggling like:", error);
     }
   };
 
@@ -92,53 +115,69 @@ const BusinessNoticePage = () => {
           <StyledPaper>
             {articleData.a_content.info_box && (
               <>
-                <Typography variant="h5" gutterBottom><strong>개요</strong></Typography>
+                <Typography variant="h5" gutterBottom>
+                  <strong>개요</strong>
+                </Typography>
                 <Divider sx={{ marginY: 1 }} />
                 <TableContainer>
                   <Table>
                     <TableBody>
-                      {Object.entries(articleData.a_content.info_box).map(([key, value], index) => (
-                        <TableRow key={index}>
-                          <TableCell><strong>{key}: </strong></TableCell>
-                          <TableCell>{value}</TableCell>
-                        </TableRow>
-                      ))}
+                      {Object.entries(articleData.a_content.info_box).map(
+                        ([key, value], index) => (
+                          <TableRow key={index}>
+                            <TableCell>
+                              <strong>{key}: </strong>
+                            </TableCell>
+                            <TableCell>{value}</TableCell>
+                          </TableRow>
+                        )
+                      )}
                     </TableBody>
                   </Table>
                 </TableContainer>
               </>
             )}
             <Divider sx={{ marginY: 1 }} />
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
               {parseHTML(articleData.a_content.desc_list)}
             </Box>
+            <div style={{ marginTop: "30px" }}>
+              <IconButton onClick={handleLikeClick}>
+                {liked ? (
+                  <FavoriteIcon color="error" style={{ fontSize: "3rem" }} />
+                ) : (
+                  <FavoriteBorderIcon style={{ fontSize: "3rem" }} />
+                )}
+              </IconButton>
+              <Typography variant="body2" sx={{ fontWeight: "bold" }}>
+                좋아요
+              </Typography>
+            </div>
           </StyledPaper>
-          <StyledPaper>
-            <Typography variant="h5" sx={{ fontWeight: 'bold', marginBottom: 1 }}>첨부파일</Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-              {articleData.a_content.attachment_list.map((attachment, index) => (
-                   <Box key={index} sx={{ display: 'flex', justifyContent: 'center', marginTop: 1 }}>
-                  <StyledOutlinedButton
-                    onClick={() => handleAttachmentButtonClick(attachment.url)}
-                    color="primary"
-                    variant="contained" 
-                    disableElevation 
-                    size="small" 
-                    style={{ borderRadius: '5px' }} 
-                  >
-                    {attachment.name}
-                  </StyledOutlinedButton>
-                </Box>
-              ))}
-            </Box>
-          </StyledPaper>
-          <StyledPaper>
-            <IconButton onClick={handleLikeClick}>
-              {liked ? <FavoriteIcon color="error" style={{ fontSize: "5rem" }} /> 
-              : <FavoriteBorderIcon style={{ fontSize: "5rem" }} />}
-            </IconButton>
-            <Typography variant="body2" sx={{ fontWeight: 'bold' }}>좋아요</Typography>
-          </StyledPaper>
+
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            {articleData.a_content.attachment_list.map((attachment, index) => (
+              <Box
+                key={index}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: 1,
+                }}
+              >
+                <StyledOutlinedButton
+                  onClick={() => handleAttachmentButtonClick(attachment.url)}
+                  color="primary"
+                  variant="contained"
+                  disableElevation
+                  size="small"
+                  style={{ borderRadius: "5px" }}
+                >
+                  {attachment.name}
+                </StyledOutlinedButton>
+              </Box>
+            ))}
+          </Box>
         </div>
       )}
     </div>
