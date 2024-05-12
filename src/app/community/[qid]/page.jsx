@@ -1,5 +1,5 @@
 "use client";
-import { Space, Typography, Card, Input, Button, Alert } from "antd";
+import { Space, Typography, Card, Input, Button, Alert, Modal } from "antd";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -16,6 +16,9 @@ const Content = ({ params }) => {
   const [comment, setComment] = useState("");
   const [isContentLoading, setIsContentLoading] = useState(true);
   const [isCommentLoading, setIsCommentLoading] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editTitle, setEditTitle] = useState("");
+  const [editContent, setEditContent] = useState("");
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -31,11 +34,13 @@ const Content = ({ params }) => {
         `https://api.g-start-up.com/api/question/${params.qid}`,
         {
           headers: {
-            authorization: `Bearer ${session?.user?.id}`,
+            Authorization: `Bearer ${session?.user?.id}`,
           },
         }
       );
       setData(response.data);
+      setEditTitle(response.data.title);
+      setEditContent(response.data.content);
       setIsContentLoading(false);
       setIsCommentLoading(false);
     } catch (error) {
@@ -48,9 +53,7 @@ const Content = ({ params }) => {
     try {
       await axios.post(
         `https://api.g-start-up.com/api/question/${params.qid}/answer`,
-        {
-          content: comment,
-        },
+        { content: comment },
         {
           headers: {
             Authorization: `Bearer ${session?.user?.id}`,
@@ -64,6 +67,48 @@ const Content = ({ params }) => {
     }
   };
 
+  const updateContent = async () => {
+    setIsContentLoading(true);
+    try {
+      await axios.put(
+        `https://api.g-start-up.com/api/question?qid=${params.qid}`,
+        {
+          title: editTitle,
+          content: editContent,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${session?.user?.id}`,
+          },
+        }
+      );
+      alert("글이 수정되었습니다.");
+      fetchData();
+    } catch (error) {
+      console.error("Error updating content:", error);
+    } finally {
+      setIsEditing(false);
+      setIsContentLoading(false);
+    }
+  };
+
+  const deleteContent = async () => {
+    try {
+      await axios.delete(
+        `https://api.g-start-up.com/api/question?qid=${params.qid}`,
+        {
+          headers: {
+            Authorization: `Bearer ${session?.user?.id}`,
+          },
+        }
+      );
+      alert("글이 삭제되었습니다.");
+      window.history.back();
+    } catch (error) {
+      console.error("Error deleting content:", error);
+    }
+  };
+
   if (!data || isContentLoading) {
     return <Alert type="info" message="로딩 중..." />;
   }
@@ -74,23 +119,47 @@ const Content = ({ params }) => {
       <Container>
         <Intro />
         <Space direction="vertical" size={20} style={{ width: "100%" }}>
-          <Title level={2}>경험공유</Title>
           <article>
             <Card
               title={<Title level={3}>{data.title}</Title>}
               extra={
                 <Space>
-                  <Text>작성자: {data.author}</Text>
-                  <Text>
-                    작성일자: {new Date(data.created_date).toLocaleString()}
-                  </Text>
-                  <Text>조회수: {data.hit_count}</Text>
+                  {isEditing ? (
+                    <>
+                      <Button onClick={updateContent} type="primary">
+                        저장
+                      </Button>
+                      <Button onClick={() => setIsEditing(false)}>취소</Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button onClick={() => setIsEditing(true)}>수정</Button>
+                      <Button onClick={deleteContent} danger type="primary">
+                        삭제
+                      </Button>
+                    </>
+                  )}
                 </Space>
               }
             >
-              <Typography>
-                <Paragraph>{data.content}</Paragraph>
-              </Typography>
+              {isEditing ? (
+                <>
+                  <Input
+                    value={editTitle}
+                    onChange={(e) => setEditTitle(e.target.value)}
+                    style={{ marginBottom: 8 }}
+                  />
+                  <Input.TextArea
+                    value={editContent}
+                    onChange={(e) => setEditContent(e.target.value)}
+                    rows={4}
+                  />
+                </>
+              ) : (
+                <Typography>
+                  <Paragraph>{data.content}</Paragraph>
+                </Typography>
+              )}
             </Card>
           </article>
           <div className="CommentList">
