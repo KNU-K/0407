@@ -19,6 +19,8 @@ const Content = ({ params }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState("");
   const [editContent, setEditContent] = useState("");
+  const [userUid, setUserUid] = useState(null); // 사용자 UID 상태
+  const [authorUid, setAuthorUid] = useState(null); // 게시물 작성자 UID 상태
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -26,6 +28,7 @@ const Content = ({ params }) => {
       window.history.back();
     }
     fetchData();
+    fetchUserData();
   }, [session, status]);
 
   const fetchData = async () => {
@@ -34,17 +37,34 @@ const Content = ({ params }) => {
         `https://api.g-start-up.com/api/question/${params.qid}`,
         {
           headers: {
-            Authorization: `Bearer ${session?.user?.id}`,
+            Authorization: `Bearer ${session.user.id}`,
           },
         }
       );
       setData(response.data);
+      setAuthorUid(response.data.uid); // 게시물 작성자 UID 설정
       setEditTitle(response.data.title);
       setEditContent(response.data.content);
       setIsContentLoading(false);
       setIsCommentLoading(false);
+      console.log(response.data.uid);
     } catch (error) {
       console.error("Error fetching data:", error);
+    }
+  };
+
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get("https://api.g-start-up.com/api/user", {
+        headers: {
+          Authorization: `Bearer ${session.user.id}`,
+        },
+      });
+      const userData = response.data;
+      setUserUid(userData.info.uid); // 사용자 UID 설정
+      console.log("사용자 정보:", userData.info.uid); // 콘솔에 사용자 정보 출력
+    } catch (error) {
+      console.error("사용자 정보를 가져오는 데 실패했습니다:", error);
     }
   };
 
@@ -113,6 +133,8 @@ const Content = ({ params }) => {
     return <Alert type="info" message="로딩 중..." />;
   }
 
+  const canEditOrDelete = userUid === authorUid; // 수정, 삭제 가능 여부 판단
+
   return (
     <main>
       <TopNav />
@@ -123,23 +145,27 @@ const Content = ({ params }) => {
             <Card
               title={<Title level={3}>{data.title}</Title>}
               extra={
-                <Space>
-                  {isEditing ? (
-                    <>
-                      <Button onClick={updateContent} type="primary">
-                        저장
-                      </Button>
-                      <Button onClick={() => setIsEditing(false)}>취소</Button>
-                    </>
-                  ) : (
-                    <>
-                      <Button onClick={() => setIsEditing(true)}>수정</Button>
-                      <Button onClick={deleteContent} danger type="primary">
-                        삭제
-                      </Button>
-                    </>
-                  )}
-                </Space>
+                canEditOrDelete ? (
+                  <Space>
+                    {isEditing ? (
+                      <>
+                        <Button onClick={updateContent} type="primary">
+                          저장
+                        </Button>
+                        <Button onClick={() => setIsEditing(false)}>
+                          취소
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <Button onClick={() => setIsEditing(true)}>수정</Button>
+                        <Button onClick={deleteContent} danger type="primary">
+                          삭제
+                        </Button>
+                      </>
+                    )}
+                  </Space>
+                ) : null
               }
             >
               {isEditing ? (
