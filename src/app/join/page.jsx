@@ -12,7 +12,7 @@ const JoinForm = () => {
     try {
       await axios.post("https://api.g-start-up.com/api/user", formData);
       console.log("회원가입이 성공적으로 완료되었습니다.");
-      console.log(formData);
+      // console.log(formData);
       window.location.href = "/";
       // alert("회원가입 되었습니다. 가입하신 계정으로 로그인해주세요.");
       alert(JSON.stringify(formData, null, 2));

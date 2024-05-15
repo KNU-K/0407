@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "antd";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
@@ -14,6 +14,14 @@ import GoogleTranslate from "./translate";
 
 export function TopNav() {
   const { data: session, status } = useSession();
+  useEffect(() => {
+    if (session?.isExpired) {
+      signOut({ redirect: false }).then(() => {
+        window.location.reload(); // 페이지 새로고침을 통한 세션 갱신
+      });
+    }
+  }, [session]);
+
   const [showChatbot, setShowChatbot] = useState(false); // State to manage chatbot visibility
 
   const handleLogout = async () => {
@@ -21,7 +29,7 @@ export function TopNav() {
   };
 
   if (status === "loading") return null;
-
+  console.log("상태확인해보기", status);
   return (
     <nav className="top-nav bg-gray-100 py-2 px-4 flex justify-between items-center relative text-sm">
       <GoogleTranslate />

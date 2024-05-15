@@ -21,6 +21,11 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { getSession } from "next-auth/react";
 import { Space } from "antd";
+import { signOut } from "next-auth/react";
+
+const handleLogout = async () => {
+  await signOut();
+};
 
 const StyledPaper = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
@@ -58,6 +63,12 @@ const BusinessNoticePage = () => {
         );
         setArticleData(response.data);
         setLiked(response.data.user_likes === "1");
+        console.log(response.data.msg);
+        // if (response.data.msg === "jwt expired") {
+        //   alert("세션이 만료되었습니다. 다시 로그인해 주세요.");
+        //   await signOut({ redirect: false }); // 비동기 로그아웃 처리
+        //   window.location.href = "/business-notice";
+        // }
       } catch (error) {
         console.error("Error fetching article data:", error);
       }
@@ -155,7 +166,13 @@ const BusinessNoticePage = () => {
             </div>
           </StyledPaper>
 
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
+          >
             {articleData.a_content.attachment_list.map((attachment, index) => (
               <Box
                 key={index}
