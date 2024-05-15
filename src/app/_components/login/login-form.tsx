@@ -18,23 +18,31 @@ const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const router = useRouter();
+  const [error, setError] = useState<string | null>(null);
   const handleFinish = useCallback(async (value: ILoginFormValue) => {
     setIsLoading(true);
+    setError(null);
 
     try {
       console.log(value);
       const response = await signIn("login-credentials", {
         username: value.username,
         password: value.password,
+        redirect: false,
       });
       console.log(response);
       // alert('로그인에 성공했습니다.');
       //router.push('/');
-      window.location.href = "/";
+      // window.location.href = "/";
+      if (response?.error) {
+        alert("로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해주세요.");
+        setIsLoading(false);
+      } else {
+        window.location.href = "/";
+      }
     } catch (error) {
       console.error(error);
-      alert("로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해주세요.");
-    } finally {
+      alert("로그인 중 오류가 발생했습니다.");
       setIsLoading(false);
     }
   }, []);
