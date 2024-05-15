@@ -70,9 +70,9 @@ const handler = NextAuth({
         const decodedToken = parseJwt(token.accessToken as string); // 타입을 명시적으로 지정
         token.accessTokenExpires = decodedToken.exp * 1000; // 만료 시간 저장
       }
-      console.log("만료시간확인", token.accessTokenExpires as number);
+      // console.log("만료시간확인", token.accessTokenExpires as number);
       const timeresult = Date.now();
-      console.log("시간결과확인", timeresult);
+      // console.log("시간결과확인", timeresult);
       // 토큰 만료 검사
       if (
         token.accessTokenExpires &&
