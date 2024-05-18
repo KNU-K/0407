@@ -4,7 +4,6 @@ import { Modal } from "antd";
 import axios from "axios";
 import Script from "next/script";
 import { useEffect, useState } from "react";
-import { Map, MapMarker } from "react-kakao-maps-sdk";
 import sanitize from "sanitize-html";
 
 const regionList = [
@@ -34,6 +33,8 @@ export default function Home() {
   const KAKAO_SDK_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_KEY}&autoload=false`;
   const [list, setList] = useState([]);
   const [modal, setModal] = useState(null);
+  const [map, setMap] = useState(null);
+
   useEffect(() => {
     const getData = async (region) => {
       const { data } = await axios.get(
@@ -45,6 +46,44 @@ export default function Home() {
     };
     if (region) getData(region);
   }, [region]);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = KAKAO_SDK_URL;
+    script.async = true;
+    script.onload = () => {
+      kakao.maps.load(() => {
+        const container = document.getElementById("map");
+        const options = {
+          center: new kakao.maps.LatLng(lat, lng),
+          level: 4,
+        };
+        const newMap = new kakao.maps.Map(container, options);
+        setMap(newMap);
+      });
+    };
+    document.head.appendChild(script);
+  }, []);
+
+  useEffect(() => {
+    if (map) {
+      const newCenter = new kakao.maps.LatLng(lat, lng);
+      map.setCenter(newCenter);
+      list.forEach((item) => {
+        const markerPosition = new kakao.maps.LatLng(item.latde, item.lgtde);
+        const marker = new kakao.maps.Marker({
+          position: markerPosition,
+          title: item.cntr_nm,
+        });
+        marker.setMap(map);
+        kakao.maps.event.addListener(marker, "click", () => {
+          setLat(item.latde);
+          setLng(item.lgtde);
+          setModal(item);
+        });
+      });
+    }
+  }, [map, lat, lng, list]);
 
   return (
     <div
@@ -170,33 +209,7 @@ export default function Home() {
           </div>
         )}
       </div>
-      <>
-        <Script src={KAKAO_SDK_URL} strategy="beforeInteractive" />
-        <Map
-          center={{
-            lat: lat,
-            lng: lng,
-          }}
-          style={{ width: "1100px", height: "100%" }}
-          level={4}
-        >
-          {list.map((item, index) => (
-            <MapMarker
-              key={index}
-              position={{
-                lat: item.latde,
-                lng: item.lgtde,
-              }}
-              title={item.cntr_nm}
-              onClick={() => {
-                setLat(item.latde);
-                setLng(item.lgtde);
-                setModal(item);
-              }}
-            />
-          ))}
-        </Map>
-      </>
+      <div id="map" style={{ width: "1100px", height: "100%" }}></div>
     </div>
   );
 }

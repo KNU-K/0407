@@ -1,59 +1,24 @@
 "use client";
 import Container from "@/app/_components/container";
-import Join from "@/app/_components/join";
-import { Intro } from "../_components/intro";
-import { Space } from "antd";
-import axios from "axios";
-import { TopNav } from "@/app/_components/top-nav";
+import { Intro } from "@/app/_components/intro";
+import Mypage from "@/app/_components/mypage"; // 기존에 import한 Mypage
+import { Avatar, Card, Flex, Space } from "antd";
+import { TopNav } from "../_components/top-nav";
 import Footer from "@/app/_components/footer";
 
-const MyPage = () => {
-  const handleFormSubmit = async (formData) => {
-    try {
-      await axios.post("https://api.g-start-up.com/api/user", formData);
-      console.log("회원가입이 성공적으로 완료되었습니다.");
-      console.log(formData);
-      window.location.href = "/";
-      // alert("회원가입 되었습니다. 가입하신 계정으로 로그인해주세요.");
-      alert(JSON.stringify(formData, null, 2));
-    } catch (error) {
-      console.error("회원가입에 실패했습니다.", error);
-      alert("회원가입에 실패했습니다.");
-    }
-  };
-
+export default function MypageComponent() {
+  // 함수명을 MypageComponent로 변경
   return (
     <main>
       <TopNav />
       <Container>
-        <div>
-          <Intro />
-          <Space className="justify-between mb-3">
-            <h1 style={{ fontSize: 20, fontWeight: "bolder" }}>마이페이지</h1>
-          </Space>
-          <JoinContainer>
-            <Join onFinish={handleFormSubmit} />
-          </JoinContainer>
-        </div>
+        <Intro />
+        <Space className="justify-between mb-3">
+          <h1 style={{ fontSize: 20, fontWeight: "bolder" }}>마이페이지</h1>
+        </Space>
+        <Mypage />
       </Container>
       <Footer />
     </main>
   );
-};
-
-const JoinContainer = ({ children }) => (
-  <div style={{ display: "flex", justifyContent: "center" }}>
-    <div
-      style={{
-        marginTop: "20px",
-        marginBottom: "20px",
-        width: "100%",
-        maxWidth: "400px",
-      }}
-    >
-      {children}
-    </div>
-  </div>
-);
-
-export default MyPage;
+}

@@ -5,8 +5,8 @@ import Link from "next/link";
 
 import axios from "axios";
 import { EditOutlined } from "@ant-design/icons";
-import { Spin, Table } from "antd";
-import {Button} from "@mui/material";
+import { Spin, Table, Button } from "antd";
+// import { Button } from "@mui/material";
 import { useState } from "react";
 function convertToKST(dateString) {
   // ISO 8601 형식의 날짜 문자열을 Date 객체로 변환
@@ -96,7 +96,17 @@ export default function CommunityBoard() {
         }}
       >
         <Link href="/community/write">
-          <Button style={{ fontSize: 15, fontWeight: "bolder" }} icon={<EditOutlined />}>글쓰기</Button>
+          <Button
+            type="primary"
+            style={{
+              fontSize: 15,
+              fontWeight: "bolder",
+            }}
+            icon={<EditOutlined />}
+            className="bg-blue-500 hover:bg-blue-600 text-xs py-1 px-2 custom-button"
+          >
+            글쓰기
+          </Button>
         </Link>
       </div>
       <Table
@@ -105,8 +115,14 @@ export default function CommunityBoard() {
         rowKey={"qid"}
         pagination={false}
       />
-      <div style={{ display: "flex", justifyContent: "center",
-       marginTop: '10px', marginBottom: '10px' }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          marginTop: "10px",
+          marginBottom: "10px",
+        }}
+      >
         {[...Array(pageCount)].map((_, index) => (
           <Button
             key={index}

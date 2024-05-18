@@ -72,3 +72,16 @@ footer {
 .custom-button {
   font-size: 12px !important;
 }
+
+.ant-modal-mask {
+  background: none !important;
+}
+
+/* 페이지목록 */
+.custom-pagination .ant-pagination-item a {
+  color: blue !important;
+}
+
+.custom-pagination .ant-pagination-item-active {
+  border-color: blue !important;
+}
