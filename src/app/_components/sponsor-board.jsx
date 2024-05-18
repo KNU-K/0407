@@ -37,7 +37,7 @@ const SponsorBoard = () => {
     try {
       const response = await axios.get(
         "https://api.g-start-up.com/api/user",
-        {},
+
         {
           headers: {
             Authorization: `Bearer ${session.user.id}`,
@@ -160,10 +160,11 @@ const SponsorBoard = () => {
   };
 
   useEffect(() => {
-    // fetchUserData();
     fetchData();
-    fetchUserData();
-  }, []);
+    if (status === "authenticated") {
+      fetchUserData();
+    }
+  }, [status]);
 
   const columns = [
     {
