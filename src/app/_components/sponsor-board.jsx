@@ -35,11 +35,15 @@ const SponsorBoard = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get("https://api.g-start-up.com/api/user", {
-        headers: {
-          Authorization: `Bearer ${session.user.id}`,
-        },
-      });
+      const response = await axios.get(
+        "https://api.g-start-up.com/api/user",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${session.user.id}`,
+          },
+        }
+      );
       setUserRole(response.data.info.role);
       console.log(response.data.info.role);
     } catch (error) {
