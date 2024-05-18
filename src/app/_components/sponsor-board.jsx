@@ -156,8 +156,9 @@ const SponsorBoard = () => {
   };
 
   useEffect(() => {
-    fetchUserData();
+    // fetchUserData();
     fetchData();
+    fetchUserData();
   }, []);
 
   const columns = [
