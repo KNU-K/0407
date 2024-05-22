@@ -160,110 +160,124 @@ const MyPage = () => {
             </Text>
           </Card>
         </Col>
-        {sponse_info && (
-          <Col span={12}>
-            <Card
-              title={
-                <>
-                  <Title
-                    level={3}
-                    style={{
-                      color: "black",
-                      fontWeight: "bold",
-                      marginTop: "20px",
-                    }}
+        <Col span={12}>
+          <Title
+            level={3}
+            style={{
+              color: "black",
+              fontWeight: "bold",
+              marginTop: "20px",
+            }}
+          >
+            스폰서 현황
+          </Title>
+          <Divider style={{ border: "2px solid black" }} />
+          <Card
+            style={{
+              border: "1px solid black",
+              maxHeight: "600px",
+              overflowY: "auto",
+            }}
+          >
+            {sponse_info.map((sponsor) => (
+              <div key={sponsor.sid} style={{ marginBottom: "20px" }}>
+                <Card
+                  style={{ marginBottom: "10px", border: "1px solid #d9d9d9" }}
+                >
+                  <Text style={{ fontSize: "20px" }}>
+                    <strong>제목:</strong> {sponsor.title}
+                  </Text>
+                  <Divider />
+                  <Text style={{ fontSize: "20px" }}>
+                    <strong>내용:</strong> {sponsor.content}
+                  </Text>
+                  <Divider />
+                  <Text style={{ fontSize: "20px" }}>
+                    <strong>상태:</strong> {sponsor.status}
+                  </Text>
+                  <Divider />
+                  <Button
+                    type="primary"
+                    onClick={() =>
+                      handleSponsorStatusChange(sponsor.sid, "accept")
+                    }
+                    style={{ marginRight: "10px" }}
                   >
-                    스폰서 현황
-                  </Title>
-                  <Divider style={{ border: "2px solid black" }} />
-                </>
-              }
-              style={{ border: "1px solid black" }}
-            >
-              <Text style={{ fontSize: "20px" }}>
-                <strong>제목:</strong> {sponse_info.title}
-              </Text>
-              <Divider />
-              <Text style={{ fontSize: "20px" }}>
-                <strong>내용:</strong> {sponse_info.content}
-              </Text>
-              <Divider />
-              <Text style={{ fontSize: "20px" }}>
-                <strong>상태:</strong> {sponse_info.status}
-              </Text>
-              <Divider />
-              <Button
-                type="primary"
-                onClick={() =>
-                  handleSponsorStatusChange(sponse_info.sid, "accept")
-                }
-                style={{ marginRight: "10px" }}
-              >
-                수락
-              </Button>
-              <Button
-                type="danger"
-                onClick={() =>
-                  handleSponsorStatusChange(sponse_info.sid, "reject")
-                }
-              >
-                거절
-              </Button>
-            </Card>
-          </Col>
-        )}
-        {recruit_info && (
-          <Col span={12}>
-            <Card
-              title={
-                <>
-                  <Title
-                    level={3}
-                    style={{
-                      color: "black",
-                      fontWeight: "bold",
-                      marginTop: "20px",
-                    }}
+                    수락
+                  </Button>
+                  <Button
+                    type="danger"
+                    onClick={() =>
+                      handleSponsorStatusChange(sponsor.sid, "reject")
+                    }
                   >
-                    채용 현황
-                  </Title>
-                  <Divider style={{ border: "2px solid black" }} />
-                </>
-              }
-              style={{ border: "1px solid black" }}
-            >
-              <Text style={{ fontSize: "20px" }}>
-                <strong>제목:</strong> {recruit_info.title}
-              </Text>
-              <Divider />
-              <Text style={{ fontSize: "20px" }}>
-                <strong>내용:</strong> {recruit_info.content}
-              </Text>
-              <Divider />
-              <Text style={{ fontSize: "20px" }}>
-                <strong>상태:</strong> {recruit_info.status}
-              </Text>
-              <Divider />
-              <Button
-                type="primary"
-                onClick={() =>
-                  handleRecruitStatusChange(recruit_info.rid, "accept")
-                }
-                style={{ marginRight: "10px" }}
-              >
-                수락
-              </Button>
-              <Button
-                type="danger"
-                onClick={() =>
-                  handleRecruitStatusChange(recruit_info.rid, "reject")
-                }
-              >
-                거절
-              </Button>
-            </Card>
-          </Col>
-        )}
+                    거절
+                  </Button>
+                </Card>
+                <Divider style={{ border: "2px solid #f0f0f0" }} />
+              </div>
+            ))}
+          </Card>
+        </Col>
+        <Col span={12}>
+          <Title
+            level={3}
+            style={{
+              color: "black",
+              fontWeight: "bold",
+              marginTop: "20px",
+            }}
+          >
+            채용 현황
+          </Title>
+          <Divider style={{ border: "2px solid black" }} />
+          <Card
+            style={{
+              border: "1px solid black",
+              maxHeight: "600px",
+              overflowY: "auto",
+            }}
+          >
+            {recruit_info.map((recruit) => (
+              <div key={recruit.rid} style={{ marginBottom: "20px" }}>
+                <Card
+                  style={{ marginBottom: "10px", border: "1px solid #d9d9d9" }}
+                >
+                  <Text style={{ fontSize: "20px" }}>
+                    <strong>제목:</strong> {recruit.title}
+                  </Text>
+                  <Divider />
+                  <Text style={{ fontSize: "20px" }}>
+                    <strong>내용:</strong> {recruit.content}
+                  </Text>
+                  <Divider />
+                  <Text style={{ fontSize: "20px" }}>
+                    <strong>상태:</strong> {recruit.status}
+                  </Text>
+                  <Divider />
+                  <Button
+                    type="primary"
+                    onClick={() =>
+                      handleRecruitStatusChange(recruit.rid, "accept")
+                    }
+                    style={{ marginRight: "10px" }}
+                  >
+                    수락
+                  </Button>
+                  <Button
+                    type="danger"
+                    onClick={() =>
+                      handleRecruitStatusChange(recruit.rid, "reject")
+                    }
+                  >
+                    거절
+                  </Button>
+                </Card>
+                <Divider style={{ border: "2px solid #f0f0f0" }} />
+              </div>
+            ))}
+          </Card>
+        </Col>
       </Row>
     </div>
   );
