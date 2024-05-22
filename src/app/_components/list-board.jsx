@@ -36,7 +36,7 @@ export default function CommunityBoard() {
   React.useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        `https://api.g-start-up.com/api/question?pageNumber=${curPageCount}`
+        `https://api.g-start-up.com/api/service1/question?pageNumber=${curPageCount}`
       );
       console.log(response.data);
       setPageCount(response.data.page_count);

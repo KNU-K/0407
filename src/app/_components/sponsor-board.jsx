@@ -36,7 +36,7 @@ const SponsorBoard = () => {
   const fetchUserData = async () => {
     try {
       const response = await axios.get(
-        "https://api.g-start-up.com/api/user",
+        "https://api.g-start-up.com/service1/api/user",
 
         {
           headers: {
@@ -54,7 +54,7 @@ const SponsorBoard = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "https://api.g-start-up.com/api/recruit-board"
+        "https://api.g-start-up.com/service1/api/recruit-board"
       );
       const fetchedData = response.data.map((item, index) => ({
         key: item.id,
@@ -79,7 +79,7 @@ const SponsorBoard = () => {
       }
 
       const response = await axios.get(
-        `https://api.g-start-up.com/api/recruit-board/${id}`,
+        `https://api.g-start-up.com/service1/api/recruit-board/${id}`,
         {
           headers: {
             Authorization: `Bearer ${session.user.id}`,
@@ -102,7 +102,7 @@ const SponsorBoard = () => {
       }
 
       await axios.post(
-        `https://api.g-start-up.com/api/recruit-board/${id}/invest`,
+        `https://api.g-start-up.com/service1/api/recruit-board/${id}/invest`,
         {},
         {
           headers: {
@@ -125,7 +125,7 @@ const SponsorBoard = () => {
       }
 
       await axios.post(
-        `https://api.g-start-up.com/api/recruit-board/${id}/recruit`,
+        `https://api.g-start-up.com/service1/api/recruit-board/${id}/recruit`,
         {},
         {
           headers: {
@@ -146,11 +146,15 @@ const SponsorBoard = () => {
         return;
       }
 
-      await axios.post("https://api.g-start-up.com/api/recruit-board", values, {
-        headers: {
-          Authorization: `Bearer ${session.user.id}`,
-        },
-      });
+      await axios.post(
+        "https://api.g-start-up.com/service1/api/recruit-board",
+        values,
+        {
+          headers: {
+            Authorization: `Bearer ${session.user.id}`,
+          },
+        }
+      );
       alert("게시글이 성공적으로 작성되었습니다.");
       setIsFormModalVisible(false);
       fetchData(); // 새로운 데이터를 불러오기 위해 테이블을 갱신합니다.

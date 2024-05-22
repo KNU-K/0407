@@ -31,7 +31,7 @@ const MyPage = () => {
       const fetchData = async () => {
         try {
           const response = await axios.get(
-            "https://api.g-start-up.com/api/user",
+            "https://api.g-start-up.com/service1/api/user",
             {
               headers: {
                 Authorization: `Bearer ${session.user.id}`,
@@ -55,7 +55,7 @@ const MyPage = () => {
   const handleSponsorStatusChange = async (id, newStatus) => {
     try {
       await axios.put(
-        `https://api.g-start-up.com/api/recruit-board/invest?id=${id}&status=${newStatus}`
+        `https://api.g-start-up.com/service1/api/recruit-board/invest?id=${id}&status=${newStatus}`
       );
       message.success(`Status updated to ${newStatus}`);
       alert(`제안을 ${newStatus === "accept" ? "수락" : "거절"}하였습니다.`);
@@ -69,7 +69,7 @@ const MyPage = () => {
   const handleRecruitStatusChange = async (id, newStatus) => {
     try {
       await axios.put(
-        `https://api.g-start-up.com/api/recruit-board/recruit?id=${id}&status=${newStatus}`
+        `https://api.g-start-up.com/service1/api/recruit-board/recruit?id=${id}&status=${newStatus}`
       );
       message.success(`Status updated to ${newStatus}`);
       alert(`제안을 ${newStatus === "accept" ? "수락" : "거절"}하였습니다.`);

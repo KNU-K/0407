@@ -21,7 +21,7 @@ export default function WritePostPage() {
     setLoading(true);
     try {
       const response = await axios.post(
-        `https://api.g-start-up.com/api/question/`,
+        `https://api.g-start-up.com/service1/api/question/`,
         {
           title: title,
           content: content,

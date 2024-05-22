@@ -37,7 +37,7 @@ const credentialsProviderOption: CredentialsConfig<{}> = {
   },
   async authorize(credentials: Record<string, unknown> | undefined) {
     const response = await axios.post(
-      "https://api.g-start-up.com/api/auth/login",
+      "https://api.g-start-up.com/service1/api/auth/login",
       { email: credentials?.username, password: credentials?.password }
     );
     if (response.data.accessToken) {

@@ -34,7 +34,7 @@ const Content = ({ params }) => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://api.g-start-up.com/api/question/${params.qid}`,
+        `https://api.g-start-up.com/service1/api/question/${params.qid}`,
         {
           headers: {
             Authorization: `Bearer ${session.user.id}`,
@@ -55,11 +55,14 @@ const Content = ({ params }) => {
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get("https://api.g-start-up.com/api/user", {
-        headers: {
-          Authorization: `Bearer ${session.user.id}`,
-        },
-      });
+      const response = await axios.get(
+        "https://api.g-start-up.com/service1/api/user",
+        {
+          headers: {
+            Authorization: `Bearer ${session.user.id}`,
+          },
+        }
+      );
       const userData = response.data;
       setUserUid(userData.info.uid); // 사용자 UID 설정
       console.log("사용자 정보:", userData.info.uid); // 콘솔에 사용자 정보 출력
@@ -72,7 +75,7 @@ const Content = ({ params }) => {
     setIsCommentLoading(true);
     try {
       await axios.post(
-        `https://api.g-start-up.com/api/question/${params.qid}/answer`,
+        `https://api.g-start-up.com/service1/api/question/${params.qid}/answer`,
         { content: comment },
         {
           headers: {
@@ -91,7 +94,7 @@ const Content = ({ params }) => {
     setIsContentLoading(true);
     try {
       await axios.put(
-        `https://api.g-start-up.com/api/question?qid=${params.qid}`,
+        `https://api.g-start-up.com/service1/api/question?qid=${params.qid}`,
         {
           title: editTitle,
           content: editContent,
@@ -115,7 +118,7 @@ const Content = ({ params }) => {
   const deleteContent = async () => {
     try {
       await axios.delete(
-        `https://api.g-start-up.com/api/question?qid=${params.qid}`,
+        `https://api.g-start-up.com/service1/api/question?qid=${params.qid}`,
         {
           headers: {
             Authorization: `Bearer ${session?.user?.id}`,

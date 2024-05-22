@@ -19,7 +19,7 @@ const Footer = () => {
   };
   const handleSendFeedback = async () => {
     try {
-      await axios.post("https://api.g-start-up.com/api/feedback/", {
+      await axios.post("https://api.g-start-up.com/service1/api/feedback/", {
         content: feedback,
       });
 

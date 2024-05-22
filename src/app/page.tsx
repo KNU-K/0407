@@ -6,6 +6,7 @@ import { getAllPosts } from "@/lib/api";
 import { SessionProvider } from "next-auth/react";
 import { TopNav } from "./_components/top-nav";
 import Footer from "@/app/_components/footer";
+import LatestNews from "@/app/_components/latestnews";
 
 export default function Index() {
   const allPosts = getAllPosts();
@@ -16,14 +17,14 @@ export default function Index() {
 
   return (
     <main>
-      {/* <TopNav /> */}
       <TopNav />
       <Container>
         <Intro />
         {/* 메인사진있던 위치 */}
+        <LatestNews />
         <HeroPost
           title={heroPost.title}
-          coverImage={heroPost.coverImage}
+          // coverImage={heroPost.coverImage}
           date={heroPost.date}
           author={heroPost.author}
           slug={heroPost.slug}

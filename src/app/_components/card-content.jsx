@@ -35,7 +35,7 @@ const CardContent = () => {
       try {
         const token = `Bearer ${(await getSession()).user.id}`;
         const response = await axios.get(
-          `https://api.g-start-up.com/api/card-news/${cardId}`,
+          `https://api.g-start-up.com/service1/api/card-news/${cardId}`,
           {
             headers: {
               Authorization: token,
@@ -64,7 +64,7 @@ const CardContent = () => {
       if (!liked) {
         // 좋아요 추가
         await axios.post(
-          `https://api.g-start-up.com/api/card-news/${cardId}/like`,
+          `https://api.g-start-up.com/service1/api/card-news/${cardId}/like`,
           null,
           {
             headers: {
@@ -75,7 +75,7 @@ const CardContent = () => {
       } else {
         // 좋아요 취소
         await axios.delete(
-          `https://api.g-start-up.com/api/card-news/${cardId}/like`,
+          `https://api.g-start-up.com/service1/api/card-news/${cardId}/like`,
           {
             headers: {
               Authorization: token,

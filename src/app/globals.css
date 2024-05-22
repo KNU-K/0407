@@ -85,3 +85,71 @@ footer {
 .custom-pagination .ant-pagination-item-active {
   border-color: blue !important;
 }
+
+/* 메인뉴스목록 */
+.news-container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #dbd8d8;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.news-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 5px;
+  color: #000000;
+  font-weight: bold;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.news-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+}
+
+.news-card-title {
+  font-size: 1em;
+  color: #333;
+  margin: 10px;
+  white-space: nowrap; /* 한 줄로 표시 */
+  overflow: hidden; /* 넘치는 텍스트를 숨김 */
+  text-overflow: ellipsis; /* 텍스트가 넘칠 경우 '...'로 표시 */
+}
+
+.news-card-date {
+  font-size: 0.9em;
+  color: #777;
+  margin: 0 10px 10px;
+}
+
+.news-card-images {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.news-card-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  transition: transform 0.2s;
+}
+
+.news-card-image:hover {
+  transform: scale(1.05);
+}

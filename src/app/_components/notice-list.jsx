@@ -22,7 +22,7 @@ const App = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `https://api.g-start-up.com/api/article/?pageNumber=${currentPage}`
+          `https://api.g-start-up.com/service1/api/article/?pageNumber=${currentPage}`
         );
         setData(response.data.data);
         setPageCount(response.data.page_count);

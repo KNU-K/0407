@@ -10,7 +10,10 @@ import Footer from "@/app/_components/footer";
 const JoinForm = () => {
   const handleFormSubmit = async (formData) => {
     try {
-      await axios.post("https://api.g-start-up.com/api/user", formData);
+      await axios.post(
+        "https://api.g-start-up.com/service1/api/user",
+        formData
+      );
       console.log("회원가입이 성공적으로 완료되었습니다.");
       // console.log(formData);
       window.location.href = "/";
