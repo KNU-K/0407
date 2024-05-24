@@ -139,9 +139,11 @@ const Content = ({ params }) => {
   const canEditOrDelete = userUid === authorUid; // 수정, 삭제 가능 여부 판단
 
   return (
-    <main>
+    <div
+      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+    >
       <TopNav />
-      <Container>
+      <Container style={{ flex: 1 }}>
         <Intro />
         <Space direction="vertical" size={20} style={{ width: "100%" }}>
           <article>
@@ -244,8 +246,11 @@ const Content = ({ params }) => {
           </div>
         </Space>
       </Container>
+      <div
+        style={{ display: "flex", flexDirection: "column", minHeight: "40vh" }}
+      />
       <Footer />
-    </main>
+    </div>
   );
 };
 

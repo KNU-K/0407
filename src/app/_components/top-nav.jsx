@@ -17,7 +17,7 @@ export function TopNav() {
   useEffect(() => {
     if (session?.isExpired) {
       signOut({ redirect: false }).then(() => {
-        window.location.reload(); // 페이지 새로고침을 통한 세션 갱신
+        //
       });
     }
   }, [session]);
