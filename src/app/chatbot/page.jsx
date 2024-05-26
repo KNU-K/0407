@@ -5,7 +5,7 @@ import React from "react";
 
 const Page = () => {
   return (
-    <main>
+    <main className="chatbotmain">
       <Chatbot />
     </main>
   );

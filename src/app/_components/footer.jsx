@@ -9,26 +9,44 @@ import axios from "axios";
 const Footer = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [feedback, setFeedback] = useState("");
-
+  const [newsletterModalVisible, setNewsletterModalVisible] = useState(false);
   const [thankYouModalVisible, setThankYouModalVisible] = useState(false);
-  const createModal = async () => {
+
+  const toggleFeedbackModal = () => {
     setIsModalVisible(!isModalVisible);
   };
-  const toggleThankYouModal = async () => {
+
+  const toggleThankYouModal = () => {
     setThankYouModalVisible(!thankYouModalVisible);
   };
+
   const handleSendFeedback = async () => {
     try {
       await axios.post("https://api.g-start-up.com/service1/api/feedback/", {
         content: feedback,
       });
 
-      // feedback 상태 값이 업데이트된 후에 실행되도록 await 키워드 사용
       console.log(feedback);
-      createModal();
+      toggleFeedbackModal();
       toggleThankYouModal();
     } catch (error) {
       console.error("피드백 전송 중 오류 발생:", error);
+    }
+  };
+
+  const toggleNewsletterModal = () => {
+    setNewsletterModalVisible(!newsletterModalVisible);
+  };
+
+  const handleSubscribeNewsletter = async () => {
+    try {
+      // 여기에 뉴스레터 구독 API 호출 코드를 추가할 수 있습니다.
+      // 예를 들어, await axios.post("https://api.g-start-up.com/service1/api/newsletter/subscribe");
+
+      toggleNewsletterModal();
+      toggleThankYouModal();
+    } catch (error) {
+      console.error("뉴스레터 구독 중 오류 발생:", error);
     }
   };
 
@@ -41,20 +59,21 @@ const Footer = () => {
           </h3>
 
           <Button
-            onClick={createModal}
+            onClick={toggleNewsletterModal}
             type="primary"
             icon={<SmileOutlined />}
             className="text-lg font-bold px-6 py-3 border border-transparent rounded-md bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
           >
-            피드백 보내기
+            뉴스레터 구독하기
           </Button>
-          {/* 모달 */}
+
+          {/* 피드백 모달 */}
           <Modal
             title="피드백 보내기"
             open={isModalVisible}
-            onCancel={createModal}
+            onCancel={toggleFeedbackModal}
             footer={[
-              <Button key="cancel" onClick={createModal}>
+              <Button key="cancel" onClick={toggleFeedbackModal}>
                 취소
               </Button>,
               <Button key="send" type="primary" onClick={handleSendFeedback}>
@@ -69,8 +88,31 @@ const Footer = () => {
               autoSize={{ minRows: 4, maxRows: 8 }}
             />
           </Modal>
+
+          {/* 뉴스레터 구독 모달 */}
           <Modal
-            title="고맙습니다!"
+            title="뉴스레터를 구독하시겠습니까?"
+            open={newsletterModalVisible}
+            onCancel={toggleNewsletterModal}
+            footer={[
+              <Button
+                key="yes"
+                type="primary"
+                onClick={handleSubscribeNewsletter}
+              >
+                예
+              </Button>,
+              <Button key="no" onClick={toggleNewsletterModal}>
+                아니오
+              </Button>,
+            ]}
+          >
+            <p>뉴스레터를 구독하시겠습니까?</p>
+          </Modal>
+
+          {/* 감사 모달 */}
+          <Modal
+            // title="고맙습니다!"
             open={thankYouModalVisible}
             onCancel={toggleThankYouModal}
             footer={[
@@ -79,7 +121,7 @@ const Footer = () => {
               </Button>,
             ]}
           >
-            <p>고맙습니다! 귀하의 소중한 피드백을 주셔서 감사합니다.</p>
+            <p>뉴스레터가 구독되었습니다.</p>
           </Modal>
         </div>
       </Container>

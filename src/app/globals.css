@@ -167,3 +167,9 @@ footer {
 .news-card-image:hover {
   transform: scale(1.05);
 }
+
+.chatbotmain {
+  transform: scale(1.33333);
+  transform-origin: top;
+  background-color: #000000;
+}
