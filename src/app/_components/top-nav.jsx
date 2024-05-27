@@ -29,6 +29,16 @@ export function TopNav() {
     await signOut();
   };
 
+  const handleOpenModal = () => {
+    setShowChatbot(true);
+    document.body.classList.add("modal-open"); // 모달이 열릴 때 클래스 추가
+  };
+
+  const handleCloseModal = () => {
+    setShowChatbot(false);
+    document.body.classList.remove("modal-open"); // 모달이 닫힐 때 클래스 제거
+  };
+
   if (status === "loading") return null;
   console.log("상태확인해보기", status);
   return (
@@ -80,7 +90,7 @@ export function TopNav() {
         )}
         <Button
           type="primary"
-          onClick={() => setShowChatbot(true)} // Toggle chatbot visibility
+          onClick={handleOpenModal} // Toggle chatbot visibility
           icon={<MessageOutlined />}
           className="bg-blue-500 hover:bg-blue-600 text-xs py-1 px-2 custom-button"
         >
@@ -89,7 +99,7 @@ export function TopNav() {
       </div>
       <Modal
         open={showChatbot}
-        onCancel={() => setShowChatbot(false)}
+        onCancel={handleCloseModal}
         aria-labelledby="chatbot-modal-title"
         aria-describedby="chatbot-modal-description"
         footer={null}
@@ -100,6 +110,7 @@ export function TopNav() {
           justifyContent: "center",
           alignItems: "center",
         }}
+        maskClosable={true}
       >
         <div style={{ height: "30px" }} />
         <div

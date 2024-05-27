@@ -7,30 +7,36 @@ import { SessionProvider } from "next-auth/react";
 import { TopNav } from "./_components/top-nav";
 import Footer from "@/app/_components/footer";
 import LatestNews from "@/app/_components/latestnews";
+import Slide from "@/app/_components/slide";
+import Noticeinfo from "@/app/_components/notice-info";
+import Sponsorinfo from "@/app/_components/sponsor-info";
+import { Divider } from "antd";
 
 export default function Index() {
   const allPosts = getAllPosts();
-
-  const heroPost = allPosts[0];
-
-  const morePosts = allPosts.slice(1);
 
   return (
     <main>
       <TopNav />
       <Container>
         <Intro />
-        {/* 메인사진있던 위치 */}
-        <LatestNews />
-        <HeroPost
-          title={heroPost.title}
-          // coverImage={heroPost.coverImage}
-          date={heroPost.date}
-          author={heroPost.author}
-          slug={heroPost.slug}
-          excerpt={heroPost.excerpt}
-        />
-        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+        <Slide />
+        <Divider style={{ borderColor: "black" }} />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "stretch",
+            marginTop: "10px",
+          }}
+        >
+          <div style={{ flex: 1, marginRight: "10px", maxWidth: "45%" }}>
+            <Sponsorinfo />
+          </div>
+          <div style={{ flex: 2, marginLeft: "10px" }}>
+            <Noticeinfo />
+          </div>
+        </div>
       </Container>
 
       <Footer />

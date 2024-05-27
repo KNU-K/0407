@@ -1,0 +1,49 @@
+.slide-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px; /* 슬라이드 쇼의 최대 너비 설정 */
+  margin: auto; /* 가운데 정렬 */
+}
+
+.slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 700px; /* 슬라이드의 높이 설정 */
+  background-color: #ffffff; /* 배경 색 설정 */
+  cursor: pointer; /* 클릭 가능 표시 */
+}
+
+.slide-image {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto; /* 이미지가 중앙에 위치하도록 설정 */
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 16px;
+  cursor: pointer;
+  z-index: 1000;
+  user-select: none;
+}
+
+.prev {
+  left: 0;
+}
+
+.next {
+  right: 0;
+}
+
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}

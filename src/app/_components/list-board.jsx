@@ -1,13 +1,12 @@
 "use client";
 import * as React from "react";
-
 import Link from "next/link";
-
 import axios from "axios";
 import { EditOutlined } from "@ant-design/icons";
 import { Spin, Table, Button } from "antd";
-// import { Button } from "@mui/material";
+import { Pagination } from "@mui/material";
 import { useState } from "react";
+
 function convertToKST(dateString) {
   // ISO 8601 형식의 날짜 문자열을 Date 객체로 변환
   const date = new Date(dateString);
@@ -27,12 +26,14 @@ function convertToKST(dateString) {
   // Intl.DateTimeFormat을 사용하여 한국 시간대로 날짜와 시간 포맷
   return new Intl.DateTimeFormat("ko-KR", options).format(date);
 }
+
 export default function CommunityBoard() {
   const [pageCount, setPageCount] = useState(1);
   const [curPageCount, setCurPageCount] = useState(1);
-  const handlePageChange = async (page) => {
+  const handlePageChange = async (event, page) => {
     await setCurPageCount(page);
   };
+
   React.useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
@@ -80,7 +81,6 @@ export default function CommunityBoard() {
       title: "조회수",
       dataIndex: "hit_count",
     },
-
     {
       title: "좋아요 수",
       dataIndex: "like_count",
@@ -123,15 +123,15 @@ export default function CommunityBoard() {
           marginBottom: "10px",
         }}
       >
-        {[...Array(pageCount)].map((_, index) => (
-          <Button
-            key={index}
-            onClick={() => handlePageChange(index + 1)}
-            style={{ margin: "0 5px" }}
-          >
-            {index + 1}
-          </Button>
-        ))}
+        <Pagination
+          count={pageCount}
+          page={curPageCount}
+          onChange={handlePageChange}
+          siblingCount={1} // 현재 페이지 기준으로 양옆에 보여줄 페이지 수
+          boundaryCount={1} // 처음과 끝에 보여줄 페이지 수
+          shape="rounded"
+          color="primary"
+        />
       </div>
     </div>
   );

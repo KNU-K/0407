@@ -11,8 +11,10 @@ import {
   Paper,
   Button,
   Chip,
+  Pagination,
 } from "@mui/material";
 import Link from "next/link";
+
 const App = () => {
   const [data, setData] = useState([]);
   const [pageCount, setPageCount] = useState(0);
@@ -34,7 +36,7 @@ const App = () => {
     fetchData();
   }, [currentPage]);
 
-  const handlePageChange = (pageNumber) => {
+  const handlePageChange = (event, pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
@@ -149,11 +151,15 @@ const App = () => {
           marginBottom: "10px",
         }}
       >
-        {[...Array(pageCount)].map((_, index) => (
-          <Button key={index} onClick={() => handlePageChange(index + 1)}>
-            {index + 1}
-          </Button>
-        ))}
+        <Pagination
+          count={pageCount}
+          page={currentPage}
+          onChange={handlePageChange}
+          siblingCount={1} // 현재 페이지 기준으로 양옆에 보여줄 페이지 수
+          boundaryCount={1} // 처음과 끝에 보여줄 페이지 수
+          shape="rounded"
+          color="primary"
+        />
       </div>
     </div>
   );

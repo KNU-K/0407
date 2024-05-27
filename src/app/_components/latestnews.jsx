@@ -28,7 +28,7 @@ const LatestNews = () => {
 
   return (
     <div className="news-container">
-      <Title className="news-title">※ 최신 창업 정보 ※</Title>
+      <Title className="news-title">최신 창업 정보</Title>
       <div className="news-grid">
         {newsData.map((news) => (
           <Link
