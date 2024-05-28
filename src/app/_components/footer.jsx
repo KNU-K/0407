@@ -1,4 +1,3 @@
-// Footer.jsx
 "use client";
 import React, { useState } from "react";
 import Container from "@/app/_components/container";
@@ -40,9 +39,6 @@ const Footer = () => {
 
   const handleSubscribeNewsletter = async () => {
     try {
-      // 여기에 뉴스레터 구독 API 호출 코드를 추가할 수 있습니다.
-      // 예를 들어, await axios.post("https://api.g-start-up.com/service1/api/newsletter/subscribe");
-
       toggleNewsletterModal();
       toggleThankYouModal();
     } catch (error) {
@@ -55,7 +51,7 @@ const Footer = () => {
       <Container>
         <div className="flex items-center justify-between">
           <h3 className="text-4xl lg:text-2xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-4 lg:mb-0 lg:pr-4 lg:w-1/2">
-            G-Start Up
+            <img src="/images/footerlogo.png"></img>
           </h3>
 
           <Button
@@ -112,7 +108,6 @@ const Footer = () => {
 
           {/* 감사 모달 */}
           <Modal
-            // title="고맙습니다!"
             open={thankYouModalVisible}
             onCancel={toggleThankYouModal}
             footer={[
